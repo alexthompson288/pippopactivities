@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MediaPlayer
 
 class ContentViewController: UIViewController {
 
@@ -18,8 +19,20 @@ class ContentViewController: UIViewController {
     var pageIndex: Int!
     var titleText: String!
     var imageFile: String!
+    var mediaFile: String!
     var galleryButtonAlpha = CGFloat()
     
+    var moviePlayer = MPMoviePlayerController()
+    
+    @IBAction func PlayMedia(sender: AnyObject) {
+        var video_URL: NSURL = NSURL(string: mediaFile)!
+        self.moviePlayer = MPMoviePlayerController(contentURL: video_URL)
+        self.moviePlayer.view.frame = CGRect(x: 20, y: 100, width: 0, height: 0)
+        self.view.addSubview(self.moviePlayer.view)
+        self.moviePlayer.controlStyle = MPMovieControlStyle.Fullscreen
+        self.moviePlayer.fullscreen = true
+        self.moviePlayer.play()
+    }
     
     @IBOutlet weak var ToGalleryButton: UIButton!
     

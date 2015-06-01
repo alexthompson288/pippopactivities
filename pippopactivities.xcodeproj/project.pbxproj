@@ -12,6 +12,8 @@
 		D55FA0781B1B52AF00984662 /* GalleryIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FA0771B1B52AF00984662 /* GalleryIndexController.swift */; };
 		D55FA07A1B1B6B3800984662 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FA0791B1B6B3800984662 /* ContentViewController.swift */; };
 		D55FA07C1B1BB6BE00984662 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FA07B1B1BB6BE00984662 /* LoginController.swift */; };
+		D55FA07F1B1C742000984662 /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FA07E1B1C742000984662 /* GalleryCell.swift */; };
+		D55FA0811B1C769F00984662 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FA0801B1C769F00984662 /* ImageLoader.swift */; };
 		D5E8EBDB1B1B364A00659ABE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8EBDA1B1B364A00659ABE /* AppDelegate.swift */; };
 		D5E8EBDD1B1B364A00659ABE /* ActivitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8EBDC1B1B364A00659ABE /* ActivitesViewController.swift */; };
 		D5E8EBE01B1B364A00659ABE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5E8EBDE1B1B364A00659ABE /* Main.storyboard */; };
@@ -37,6 +39,8 @@
 		D55FA0771B1B52AF00984662 /* GalleryIndexController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryIndexController.swift; sourceTree = "<group>"; };
 		D55FA0791B1B6B3800984662 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		D55FA07B1B1BB6BE00984662 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		D55FA07E1B1C742000984662 /* GalleryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCell.swift; sourceTree = "<group>"; };
+		D55FA0801B1C769F00984662 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		D5E8EBD51B1B364A00659ABE /* pippopactivities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pippopactivities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E8EBD91B1B364A00659ABE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5E8EBDA1B1B364A00659ABE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,12 +96,14 @@
 				D5E8EBDA1B1B364A00659ABE /* AppDelegate.swift */,
 				D5E8EBDC1B1B364A00659ABE /* ActivitesViewController.swift */,
 				D55FA0731B1B4F0B00984662 /* ActivityShowController.swift */,
+				D55FA0791B1B6B3800984662 /* ContentViewController.swift */,
 				D5E8EBFA1B1B38DA00659ABE /* ActivityCell.swift */,
 				D5E8EBDE1B1B364A00659ABE /* Main.storyboard */,
 				D55FA07B1B1BB6BE00984662 /* LoginController.swift */,
-				D55FA0791B1B6B3800984662 /* ContentViewController.swift */,
+				D55FA07E1B1C742000984662 /* GalleryCell.swift */,
 				D55FA0751B1B526400984662 /* GalleryCreateController.swift */,
 				D55FA0771B1B52AF00984662 /* GalleryIndexController.swift */,
+				D55FA0801B1C769F00984662 /* ImageLoader.swift */,
 				D5E8EBE11B1B364A00659ABE /* Images.xcassets */,
 				D5E8EBE31B1B364A00659ABE /* LaunchScreen.xib */,
 				D5E8EBD81B1B364A00659ABE /* Supporting Files */,
@@ -232,7 +238,9 @@
 			files = (
 				D5E8EBDD1B1B364A00659ABE /* ActivitesViewController.swift in Sources */,
 				D55FA0761B1B526400984662 /* GalleryCreateController.swift in Sources */,
+				D55FA0811B1C769F00984662 /* ImageLoader.swift in Sources */,
 				D5E8EBFB1B1B38DA00659ABE /* ActivityCell.swift in Sources */,
+				D55FA07F1B1C742000984662 /* GalleryCell.swift in Sources */,
 				D55FA0781B1B52AF00984662 /* GalleryIndexController.swift in Sources */,
 				D5E8EBDB1B1B364A00659ABE /* AppDelegate.swift in Sources */,
 				D55FA07C1B1BB6BE00984662 /* LoginController.swift in Sources */,

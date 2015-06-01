@@ -165,6 +165,15 @@
                                     <segue destination="vTb-P1-1f8" kind="show" id="bq0-CF-9Ou"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rzj-Df-Ekk">
+                                <rect key="frame" x="441" y="314" width="142" height="140"/>
+                                <state key="normal" title="Button" image="icon_play">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="PlayMedia:" destination="0JO-Xr-O1J" eventType="touchUpInside" id="ce4-Fo-Swg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.91214995814545485" blue="0.23843264307775702" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -224,8 +233,8 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FkG-Z2-BX1">
-                                <rect key="frame" x="473" y="369" width="79" height="30"/>
-                                <state key="normal" title="Login">
+                                <rect key="frame" x="400" y="369" width="79" height="30"/>
+                                <state key="normal" title="Activities">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -249,6 +258,21 @@
                                 <state key="normal" title="Forgot your password?">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9G-mh-vOa">
+                                <rect key="frame" x="576" y="369" width="48" height="30"/>
+                                <state key="normal" title="Gallery">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMb-Nj-Ls7">
+                                <rect key="frame" x="576" y="369" width="48" height="30"/>
+                                <state key="normal" title="Gallery">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="bVp-Wb-yaG" kind="show" id="yn3-nd-s1y"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -290,16 +314,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T21-V0-IXs">
-                                <rect key="frame" x="37" y="53" width="951" height="522"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h2I-56-jNb">
+                                <rect key="frame" x="-10" y="48" width="1034" height="621"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r7e-6s-X78">
-                                <rect key="frame" x="431" y="621" width="163" height="44"/>
+                                <rect key="frame" x="222" y="704" width="163" height="44"/>
                                 <state key="normal" title="Take picture">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="GetPhotoButton:" destination="vTb-P1-1f8" eventType="touchUpInside" id="6Hi-gB-IFz"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T21-V0-IXs">
+                                <rect key="frame" x="96" y="189" width="356" height="294"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Ht-yL-ngr">
+                                <rect key="frame" x="651" y="486" width="221" height="158"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2U-Kq-p8j">
+                                <rect key="frame" x="513" y="704" width="163" height="44"/>
+                                <state key="normal" title="Share">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="ShareButton:" destination="vTb-P1-1f8" eventType="touchUpInside" id="Biu-gE-C0s"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -308,7 +347,9 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="BackgroundCertificate" destination="h2I-56-jNb" id="sgS-Jp-Ug6"/>
                         <outlet property="PhotoImage" destination="T21-V0-IXs" id="Kgs-cT-ZET"/>
+                        <outlet property="TotalImage" destination="4Ht-yL-ngr" id="KT0-nx-Anm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="flT-8z-qDt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -337,15 +378,26 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="B6a-RZ-9Fh">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GalleryCellID" id="B6a-RZ-9Fh" customClass="GalleryCell" customModule="pippopactivities" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="217" height="208"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RL8-QR-44i">
+                                                    <rect key="frame" x="0.0" y="0.0" width="217" height="208"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chs-E6-dZX">
+                                                    <rect key="frame" x="0.0" y="0.0" width="217" height="208"/>
+                                                </imageView>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="1" green="0.49940960721441685" blue="0.4079656950993813" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="GalleryImage" destination="chs-E6-dZX" id="8M2-IJ-1pQ"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -354,16 +406,20 @@
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="MyGalleryCollection" destination="pnr-Av-53H" id="34M-Pu-3Ct"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qJM-ob-q8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1869" y="1512"/>
+            <point key="canvasLocation" x="1826" y="1578"/>
         </scene>
     </scenes>
     <resources>
+        <image name="icon_play" width="512" height="512"/>
         <image name="pippopbg1" width="2445" height="1834"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bq0-CF-9Ou"/>
+        <segue reference="dwO-WC-86v"/>
     </inferredMetricsTieBreakers>
 </document>

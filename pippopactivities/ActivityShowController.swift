@@ -16,6 +16,7 @@ class ActivityShowController: UIViewController, UIPageViewControllerDataSource {
     
     var pageTitles: NSArray!
     var pageImages: NSArray!
+    var pageMedia = NSArray()
     
     var data = ["Al", "Amy", "Tilda"]
     
@@ -25,7 +26,8 @@ class ActivityShowController: UIViewController, UIPageViewControllerDataSource {
         
         println("Activity show view loaded")
         self.pageTitles = NSArray(objects: "Overview", "Page 1","Page 2", "Certificate")
-        self.pageImages = NSArray(objects: "body1", "gingerbread1", "cinderella1", "body1")
+        self.pageImages = NSArray(objects: "body1", "gingerbread1", "cinderella1", "certificate")
+        self.pageMedia = ["https://s3-eu-west-1.amazonaws.com/pipisodes/songs_incywincyspider.mp4", "https://s3-eu-west-1.amazonaws.com/pipisodes/songs_incywincyspider.mp4", "https://s3-eu-west-1.amazonaws.com/pipisodes/songs_incywincyspider.mp4", "https://s3-eu-west-1.amazonaws.com/pipaudio/beachandthebeast_page1_audio.mp3"]
         
         self.pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageViewController") as! UIPageViewController
         self.pageViewController.dataSource = self
@@ -57,6 +59,7 @@ class ActivityShowController: UIViewController, UIPageViewControllerDataSource {
         
         vc.imageFile = self.pageImages[index] as! String
         vc.titleText = self.pageTitles[index] as! String
+        vc.mediaFile = self.pageMedia[index] as! String
         vc.pageIndex = index
         
         if vc.pageIndex == pageTitles.count - 1 {
