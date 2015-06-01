@@ -9,17 +9,27 @@
 import UIKit
 
 class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    struct Constants {
+        static let apiUrl = "http://staging.pippoplearning.com/api/v3/digitalexperiences"
+        static let homedir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+    }
 
     @IBOutlet weak var MyCollectionView: UICollectionView!
 
     @IBOutlet weak var myPicker: UIPickerView!
     
     @IBOutlet weak var myLabel: UILabel!
-    
-    
-    
+
+    let filemgr = NSFileManager.defaultManager()
     
     var data = ["body1", "cinderella1", "gingerbread1", "mask1", "cinderella1", "gingerbread1","body1", "cinderella1", "gingerbread1", "mask1", "cinderella1", "gingerbread1","body1", "cinderella1", "gingerbread1", "mask1", "cinderella1", "gingerbread1"]
+    
+    var JSONData = NSDictionary()
+    
+    var allImages = [String]()
+    var allTitles = [String]()
+
     
     let pickerData = [
         ["Digital","Printable","Certificate"],
@@ -41,6 +51,8 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadData()
         println("\(self.description) loaded")
         // Do any additional setup after loading the view, typically from a nib.
         self.MyCollectionView.delegate = self
@@ -49,6 +61,42 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
         myPicker.dataSource = self
         myPicker.selectRow(2, inComponent: PickerComponent.size.rawValue, animated: false)
         updateLabel()
+    }
+    
+    func loadData() {
+        println("Starting the loadData function")
+        var filepath  = "\(Constants.homedir)/data.plist";
+        var url = NSURL(fileURLWithPath: Constants.homedir, isDirectory: true);
+        url = url?.URLByAppendingPathComponent("data.plist");
+        
+        if filemgr.fileExistsAtPath(filepath) {
+            println("LOADING SAVED DATA AT: "+filepath);
+            var data = NSData.dataWithContentsOfMappedFile(filepath) as! NSData;
+            self.JSONData = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary;
+            println(JSONData)
+            let exps = JSONData["digitalexperiences"] as! NSArray
+            println(exps.count)
+            for exp in exps{
+                println(exp)
+                var imgString = exp["url_image_remote"] as! String
+                if imgString != ""{
+                    var img = exp["url_image_remote"] as! String
+                    self.allImages.append(img)
+                    var title = exp["title"] as! String
+                    self.allTitles.append(title)
+                }
+                
+            }
+            return;
+        }
+        else{
+            println("No subject plist. Run load remote data function")
+            loadRemoteData()
+        }
+    }
+    
+    func loadRemoteData(){
+        getJSON(Constants.apiUrl)
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -77,16 +125,18 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         println("Number of items in collection is \(self.data.count)")
-        return data.count
+        return allImages.count
     }
 
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell: ActivityCell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellID", forIndexPath: indexPath) as! ActivityCell
-        cell.ActivityTitle.text = data[indexPath.row]
-        var imagename = data[indexPath.row] as String
+        cell.ActivityTitle.text = allTitles[indexPath.row]
+        var imagename = allImages[indexPath.row] as String
         println("Image name is \(imagename)")
-        cell.ActivityImage.image = UIImage(named: imagename)
+        ImageLoader.sharedLoader.imageForUrl(imagename, completionHandler:{(image: UIImage?, url: String) in
+            cell.ActivityImage.image = image
+        })
         return cell
     }
     
@@ -95,6 +145,47 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
         var vc: ActivityShowController = self.storyboard?.instantiateViewControllerWithIdentifier("ActivityShowID") as! ActivityShowController
         vc.name = data[indexPath.row]
         performSegueWithIdentifier("ActivityIndexToShowSegue", sender: self)
+    }
+    
+    
+    func getJSON(api:String) {
+        let url = NSURL(string: api)!
+        let request = NSMutableURLRequest(URL: url)
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { (data: NSData!, response: NSURLResponse!, error: NSError!) in
+            
+            if error != nil {
+                println("Error hitting API")
+                return
+            } else {
+                println("Received data...\(data)")
+                //                println(NSString(data: data, encoding: NSUTF8StringEncoding))
+                var encodedJSON:NSDictionary = self.dataToJSON(data)
+                
+                var url = NSURL(fileURLWithPath: Constants.homedir, isDirectory: true);
+                url = url?.URLByAppendingPathComponent("data.plist");
+                var data = NSKeyedArchiver.archivedDataWithRootObject(encodedJSON);
+                println("SAVE: \(url) - (\(data.writeToURL(url!, atomically: true)))");
+                println("JSON data is \(data)")
+                
+                println("encoded JSON : \(encodedJSON)")
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func dataToJSON(data: NSData) -> NSDictionary{
+        var cleanDict = NSDictionary()
+        if let dict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error:nil) as? NSDictionary {
+            cleanDict = dict
+            //            println("Converted to JSON: \(cleanDict)")
+            
+        } else {
+            println("Could not read JSON dictionary")
+        }
+        return cleanDict
     }
     
 }

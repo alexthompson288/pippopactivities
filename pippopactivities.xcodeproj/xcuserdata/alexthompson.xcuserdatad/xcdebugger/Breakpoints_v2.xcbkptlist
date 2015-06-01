@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pippopactivities/ActivitesViewController.swift"
-            timestampString = "454768670.11468"
+            timestampString = "454868214.967231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "11"
-            endingLineNumber = "11"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
             landmarkName = "ActivitiesViewController"
             landmarkType = "3">
          </BreakpointContent>
