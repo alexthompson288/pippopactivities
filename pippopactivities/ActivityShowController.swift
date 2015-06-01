@@ -17,17 +17,15 @@ class ActivityShowController: UIViewController, UIPageViewControllerDataSource {
     var pageTitles: NSArray!
     var pageImages: NSArray!
     var pageMedia = NSArray()
+    var activityData = []
+    var name = ""
     
-    var data = ["Al", "Amy", "Tilda"]
-    
-    var name = String()
 
     override func viewDidLoad() {
-        
-        println("Activity show view loaded")
-        self.pageTitles = NSArray(objects: "Overview", "Page 1","Page 2", "Certificate")
-        self.pageImages = NSArray(objects: "body1", "gingerbread1", "cinderella1", "certificate")
+        println("Name is \(name)")
         self.pageMedia = ["https://s3-eu-west-1.amazonaws.com/pipisodes/songs_incywincyspider.mp4", "https://s3-eu-west-1.amazonaws.com/pipisodes/songs_incywincyspider.mp4", "https://s3-eu-west-1.amazonaws.com/pipisodes/songs_incywincyspider.mp4", "https://s3-eu-west-1.amazonaws.com/pipaudio/beachandthebeast_page1_audio.mp3"]
+        println("Activity show view loaded. Activity data has \(activityData) pages")
+
         
         self.pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageViewController") as! UIPageViewController
         self.pageViewController.dataSource = self
@@ -51,25 +49,26 @@ class ActivityShowController: UIViewController, UIPageViewControllerDataSource {
     
     func viewControllerAtIndex(index: Int) -> ContentViewController
     {
-        if ((self.pageTitles.count == 0) || (index >= self.pageTitles.count)) {
+        if ((self.activityData.count == 0) || (index >= self.activityData.count)) {
             return ContentViewController()
         }
         
         var vc: ContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ContentViewController") as! ContentViewController
         
-        vc.imageFile = self.pageImages[index] as! String
-        vc.titleText = self.pageTitles[index] as! String
-        vc.mediaFile = self.pageMedia[index] as! String
+        vc.imageFile = self.activityData[index]["url_image_remote"] as! String
+        vc.titleText = self.activityData[index]["title"] as! String
+        var video = self.activityData[index]["url_video_remote"] as! String
+        println("video value is \(video)")
+        vc.mediaFile = video
         vc.pageIndex = index
         
-        if vc.pageIndex == pageTitles.count - 1 {
+        if vc.pageIndex == activityData.count - 1 {
             vc.galleryButtonAlpha = 1.0
         } else {
             vc.galleryButtonAlpha = 0.0
         }
         
         return vc
-        
         
     }
     
@@ -106,7 +105,7 @@ class ActivityShowController: UIViewController, UIPageViewControllerDataSource {
         
         index++
         
-        if (index == self.pageTitles.count)
+        if (index == self.activityData.count)
         {
             return nil
         }
@@ -117,7 +116,7 @@ class ActivityShowController: UIViewController, UIPageViewControllerDataSource {
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int
     {
-        return self.pageTitles.count
+        return self.activityData.count
     }
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int

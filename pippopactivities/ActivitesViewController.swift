@@ -23,13 +23,11 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
 
     let filemgr = NSFileManager.defaultManager()
     
-    var data = ["body1", "cinderella1", "gingerbread1", "mask1", "cinderella1", "gingerbread1","body1", "cinderella1", "gingerbread1", "mask1", "cinderella1", "gingerbread1","body1", "cinderella1", "gingerbread1", "mask1", "cinderella1", "gingerbread1"]
-    
     var JSONData = NSDictionary()
     
     var allImages = [String]()
     var allTitles = [String]()
-
+    var totalData = NSArray()
     
     let pickerData = [
         ["Digital","Printable","Certificate"],
@@ -51,7 +49,6 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         loadData()
         println("\(self.description) loaded")
         // Do any additional setup after loading the view, typically from a nib.
@@ -74,7 +71,9 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
             var data = NSData.dataWithContentsOfMappedFile(filepath) as! NSData;
             self.JSONData = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary;
             println(JSONData)
+            
             let exps = JSONData["digitalexperiences"] as! NSArray
+            self.totalData = exps
             println(exps.count)
             for exp in exps{
                 println(exp)
@@ -85,18 +84,15 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
                     var title = exp["title"] as! String
                     self.allTitles.append(title)
                 }
-                
             }
             return;
         }
         else{
             println("No subject plist. Run load remote data function")
-            loadRemoteData()
+            var url = Constants.apiUrl
+            println("Constant is \(url)")
+            getJSON(url)
         }
-    }
-    
-    func loadRemoteData(){
-        getJSON(Constants.apiUrl)
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -124,7 +120,6 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        println("Number of items in collection is \(self.data.count)")
         return allImages.count
     }
 
@@ -141,10 +136,12 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        println("Item \(data[indexPath.row]) Clicked")
         var vc: ActivityShowController = self.storyboard?.instantiateViewControllerWithIdentifier("ActivityShowID") as! ActivityShowController
-        vc.name = data[indexPath.row]
-        performSegueWithIdentifier("ActivityIndexToShowSegue", sender: self)
+        var specData = totalData[indexPath.row]["pages"] as! NSArray
+        println("Specific data is \(specData)")
+        vc.activityData = specData
+        vc.name = ""
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     

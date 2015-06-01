@@ -16,6 +16,8 @@ class ContentViewController: UIViewController {
     
     @IBOutlet weak var ContentTitle: UILabel!
     
+    @IBOutlet weak var PlayIcon: UIButton!
+    
     var pageIndex: Int!
     var titleText: String!
     var imageFile: String!
@@ -39,7 +41,12 @@ class ContentViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.ContentImage.image = UIImage(named: self.imageFile)
+        ImageLoader.sharedLoader.imageForUrl(self.imageFile, completionHandler:{(image: UIImage?, url: String) in
+            self.ContentImage.image = image
+        })
+        if mediaFile == ""{
+            self.PlayIcon.alpha = 0.0
+        }
         self.ContentTitle.text = self.titleText
         self.ToGalleryButton.alpha = self.galleryButtonAlpha
         
