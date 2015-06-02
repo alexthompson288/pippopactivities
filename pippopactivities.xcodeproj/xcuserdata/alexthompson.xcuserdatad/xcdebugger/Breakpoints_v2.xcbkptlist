@@ -17,38 +17,6 @@
             endingLineNumber = "14"
             landmarkName = "Constants"
             landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "globalinit_33_38ED3E4ED6B59E509CC81CE5751951DF_func0"
-                  moduleName = "pippopactivities"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexthompson/workspace/pippopactivities/pippopactivities/ActivitesViewController.swift"
-                  timestampString = "454934046.750201"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "pippopactivities.ActivitiesViewController.Constants.apiUrl.unsafeMutableAddressor : Swift.String"
-                  moduleName = "pippopactivities"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexthompson/workspace/pippopactivities/pippopactivities/ActivitesViewController.swift"
-                  timestampString = "454934046.75038"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
