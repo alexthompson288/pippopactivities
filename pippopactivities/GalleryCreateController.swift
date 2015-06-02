@@ -110,9 +110,10 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
     func uploadToS3(){
         
         // get the image from a UIImageView that is displaying the selected Image
-        var img:UIImage = BackgroundCertificate.image!
+        var img:UIImage = TotalImage.image!
         
         // create a local image that we can use to upload to s3
+        var time = NSDate()
         var path:NSString = NSTemporaryDirectory().stringByAppendingPathComponent("image.png")
         var imageData:NSData = UIImagePNGRepresentation(img)
         imageData.writeToFile(path as String, atomically: true)
@@ -129,7 +130,7 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
         // I want this image to be public to anyone to view it so I'm setting it to Public Read
         uploadRequest?.ACL = AWSS3ObjectCannedACL.PublicRead
         // set the image's name that will be used on the s3 server. I am also creating a folder to place the image in
-        uploadRequest?.key = "image.png"
+        uploadRequest?.key = "\(time)_image.png"
         // set the content type
         uploadRequest?.contentType = "image/png"
         // and finally set the body to the local file path
