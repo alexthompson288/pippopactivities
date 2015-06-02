@@ -99,6 +99,7 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
 //        println("Trying to present activity controller")
 //        presentViewController(activity, animated: true, completion: nil)
     }
-
+    
+    
     
 }

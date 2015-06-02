@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C966904870946013941E4C7E /* libPods-pippopactivities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EDB99B5CEBD63314F2E55F /* libPods-pippopactivities.a */; };
 		D55FA0741B1B4F0B00984662 /* ActivityShowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FA0731B1B4F0B00984662 /* ActivityShowController.swift */; };
 		D55FA0761B1B526400984662 /* GalleryCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FA0751B1B526400984662 /* GalleryCreateController.swift */; };
 		D55FA0781B1B52AF00984662 /* GalleryIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FA0771B1B52AF00984662 /* GalleryIndexController.swift */; };
@@ -14,6 +15,7 @@
 		D55FA07C1B1BB6BE00984662 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FA07B1B1BB6BE00984662 /* LoginController.swift */; };
 		D55FA07F1B1C742000984662 /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FA07E1B1C742000984662 /* GalleryCell.swift */; };
 		D55FA0811B1C769F00984662 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FA0801B1C769F00984662 /* ImageLoader.swift */; };
+		D5E181FE1B1D967300FBEAEA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E181FD1B1D967300FBEAEA /* Constants.swift */; };
 		D5E8EBDB1B1B364A00659ABE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8EBDA1B1B364A00659ABE /* AppDelegate.swift */; };
 		D5E8EBDD1B1B364A00659ABE /* ActivitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8EBDC1B1B364A00659ABE /* ActivitesViewController.swift */; };
 		D5E8EBE01B1B364A00659ABE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5E8EBDE1B1B364A00659ABE /* Main.storyboard */; };
@@ -34,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		25086F074BEEE4175C100D07 /* Pods-pippopactivities.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pippopactivities.release.xcconfig"; path = "Pods/Target Support Files/Pods-pippopactivities/Pods-pippopactivities.release.xcconfig"; sourceTree = "<group>"; };
+		B5EDB99B5CEBD63314F2E55F /* libPods-pippopactivities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pippopactivities.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B90EA09617C7D6D574954F8B /* Pods-pippopactivities.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pippopactivities.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pippopactivities/Pods-pippopactivities.debug.xcconfig"; sourceTree = "<group>"; };
 		D55FA0731B1B4F0B00984662 /* ActivityShowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityShowController.swift; sourceTree = "<group>"; };
 		D55FA0751B1B526400984662 /* GalleryCreateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCreateController.swift; sourceTree = "<group>"; };
 		D55FA0771B1B52AF00984662 /* GalleryIndexController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryIndexController.swift; sourceTree = "<group>"; };
@@ -41,6 +46,8 @@
 		D55FA07B1B1BB6BE00984662 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		D55FA07E1B1C742000984662 /* GalleryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCell.swift; sourceTree = "<group>"; };
 		D55FA0801B1C769F00984662 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		D55FA0821B1CED0000984662 /* s3-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "s3-Bridging-Header.h"; sourceTree = "<group>"; };
+		D5E181FD1B1D967300FBEAEA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D5E8EBD51B1B364A00659ABE /* pippopactivities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pippopactivities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E8EBD91B1B364A00659ABE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5E8EBDA1B1B364A00659ABE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C966904870946013941E4C7E /* libPods-pippopactivities.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +80,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B8D32D85BA5F030E3AAADAED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B5EDB99B5CEBD63314F2E55F /* libPods-pippopactivities.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D5E8EBCC1B1B364A00659ABE = {
 			isa = PBXGroup;
 			children = (
 				D5E8EBD71B1B364A00659ABE /* pippopactivities */,
 				D5E8EBED1B1B364A00659ABE /* pippopactivitiesTests */,
 				D5E8EBD61B1B364A00659ABE /* Products */,
+				E2477B42AA6DF23E4DD80AD1 /* Pods */,
+				B8D32D85BA5F030E3AAADAED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,6 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				D5E8EBDA1B1B364A00659ABE /* AppDelegate.swift */,
+				D5E181FD1B1D967300FBEAEA /* Constants.swift */,
+				D55FA0821B1CED0000984662 /* s3-Bridging-Header.h */,
 				D5E8EBDC1B1B364A00659ABE /* ActivitesViewController.swift */,
 				D55FA0731B1B4F0B00984662 /* ActivityShowController.swift */,
 				D55FA0791B1B6B3800984662 /* ContentViewController.swift */,
@@ -136,6 +156,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E2477B42AA6DF23E4DD80AD1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B90EA09617C7D6D574954F8B /* Pods-pippopactivities.debug.xcconfig */,
+				25086F074BEEE4175C100D07 /* Pods-pippopactivities.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,9 +172,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5E8EBF41B1B364A00659ABE /* Build configuration list for PBXNativeTarget "pippopactivities" */;
 			buildPhases = (
+				DD09A8645D26C0019BF5B42F /* Check Pods Manifest.lock */,
 				D5E8EBD11B1B364A00659ABE /* Sources */,
 				D5E8EBD21B1B364A00659ABE /* Frameworks */,
 				D5E8EBD31B1B364A00659ABE /* Resources */,
+				DBE52A119B7897403B95BB47 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,12 +262,46 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		DBE52A119B7897403B95BB47 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pippopactivities/Pods-pippopactivities-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DD09A8645D26C0019BF5B42F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D5E8EBD11B1B364A00659ABE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D5E8EBDD1B1B364A00659ABE /* ActivitesViewController.swift in Sources */,
+				D5E181FE1B1D967300FBEAEA /* Constants.swift in Sources */,
 				D55FA0761B1B526400984662 /* GalleryCreateController.swift in Sources */,
 				D55FA0811B1C769F00984662 /* ImageLoader.swift in Sources */,
 				D5E8EBFB1B1B38DA00659ABE /* ActivityCell.swift in Sources */,
@@ -372,24 +437,28 @@
 		};
 		D5E8EBF51B1B364A00659ABE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B90EA09617C7D6D574954F8B /* Pods-pippopactivities.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = pippopactivities/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "pippopactivities/s3-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
 		D5E8EBF61B1B364A00659ABE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 25086F074BEEE4175C100D07 /* Pods-pippopactivities.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = pippopactivities/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "pippopactivities/s3-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

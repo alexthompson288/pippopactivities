@@ -80,9 +80,11 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
                 var imgString = exp["url_image_remote"] as! String
                 if imgString != ""{
                     var img = exp["url_image_remote"] as! String
+                    self.MyCollectionView.reloadData()
                     self.allImages.append(img)
                     var title = exp["title"] as! String
                     self.allTitles.append(title)
+                    
                 }
             }
             return;
@@ -167,6 +169,8 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
                 println("JSON data is \(data)")
                 
                 println("encoded JSON : \(encodedJSON)")
+                self.loadData()
+                
             }
         }
         
