@@ -8,11 +8,11 @@
 
 import Foundation
 
-let CognitoRegionType = AWSRegionType.Unknown
-let DefaultServiceRegionType = AWSRegionType.Unknown
-let CognitoIdentityPoolId: String = "YourPoolID"
-let S3BucketName: String = "YourS3BucketName"
-let S3DownloadKeyName: String = "YourDownloadKeyName"
+let CognitoRegionType = AWSRegionType.EUWest1
+let DefaultServiceRegionType = AWSRegionType.EUWest1
+let CognitoIdentityPoolId: String = "eu-west-1:e35d7d91-8fc7-4793-9a6a-8de09078949d"
+let S3BucketName: String = "pippopugc"
+let S3DownloadKeyName: String = "city_taxis.jpg"
 
 let S3UploadKeyName: String = "uploadfileswift.txt"
 let BackgroundSessionUploadIdentifier: String = "com.amazon.example.s3BackgroundTransferSwift.uploadSession"
