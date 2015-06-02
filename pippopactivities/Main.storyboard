@@ -212,29 +212,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="alex@alexjbthompson.com" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aP3-Lg-Frl">
-                                <rect key="frame" x="400" y="264" width="224" height="30"/>
+                                <rect key="frame" x="400" y="205" width="224" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="JoeCole10" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yFG-ZV-Bqj">
-                                <rect key="frame" x="400" y="318" width="224" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FkG-Z2-BX1">
-                                <rect key="frame" x="400" y="369" width="79" height="30"/>
-                                <state key="normal" title="Activities">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="meC-vm-c21" kind="show" identifier="LoginToActivitiesSegue" id="MPQ-N9-h52"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7E-AQ-7SJ">
                                 <rect key="frame" x="484" y="500" width="57" height="30"/>
                                 <state key="normal" title="Register">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="RegisterLoginToggleButton:" destination="iUh-WI-I0F" eventType="touchUpInside" id="U3d-Pr-Yw9"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Haven't got an account? Create your free account here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="py2-Do-4I1">
                                 <rect key="frame" x="287" y="471" width="451" height="21"/>
@@ -248,29 +237,39 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9G-mh-vOa">
-                                <rect key="frame" x="576" y="369" width="48" height="30"/>
-                                <state key="normal" title="Gallery">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMb-Nj-Ls7">
-                                <rect key="frame" x="576" y="369" width="48" height="30"/>
-                                <state key="normal" title="Gallery">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="bVp-Wb-yaG" kind="show" id="yn3-nd-s1y"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Error label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v0t-KJ-U27">
-                                <rect key="frame" x="402" y="201" width="220" height="38"/>
+                                <rect key="frame" x="402" y="159" width="220" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="JoeCole10" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yFG-ZV-Bqj">
+                                <rect key="frame" x="400" y="243" width="224" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Parent email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gby-5z-Cvd">
+                                <rect key="frame" x="400" y="281" width="224" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Child name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QHW-Xz-3Lw">
+                                <rect key="frame" x="400" y="205" width="224" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Parent name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FMk-zE-eVk">
+                                <rect key="frame" x="400" y="243" width="224" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Parent password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4o-GT-nO7">
+                                <rect key="frame" x="400" y="321" width="224" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJV-t9-T7E">
-                                <rect key="frame" x="489" y="351" width="38" height="30"/>
+                                <rect key="frame" x="443" y="359" width="138" height="36"/>
                                 <state key="normal" title="Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -286,7 +285,13 @@
                     <connections>
                         <outlet property="EmailField" destination="aP3-Lg-Frl" id="SuT-L8-py1"/>
                         <outlet property="ErrorLabel" destination="v0t-KJ-U27" id="Jmu-23-c4a"/>
+                        <outlet property="LoginRegisterButtonLabel" destination="EJV-t9-T7E" id="XUK-D1-JZI"/>
                         <outlet property="PasswordField" destination="yFG-ZV-Bqj" id="8lw-V6-OXL"/>
+                        <outlet property="RegisterChildField" destination="QHW-Xz-3Lw" id="0xb-DS-C17"/>
+                        <outlet property="RegisterEmailField" destination="Gby-5z-Cvd" id="E8z-nx-zdB"/>
+                        <outlet property="RegisterParentField" destination="FMk-zE-eVk" id="Zjd-1l-C3G"/>
+                        <outlet property="RegisterPasswordField" destination="I4o-GT-nO7" id="kEY-2I-EQg"/>
+                        <segue destination="meC-vm-c21" kind="show" identifier="LoginToActivitiesSegue" id="Bcs-gn-mA8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OlT-uE-HsG" userLabel="First Responder" sceneMemberID="firstResponder"/>
