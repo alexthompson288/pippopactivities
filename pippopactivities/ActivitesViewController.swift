@@ -8,13 +8,15 @@
 
 import UIKit
 
+struct Constants {
+    static let apiUrl = "http://staging.pippoplearning.com/api/v3/digitalexperiences"
+    static let homedir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+}
+
 class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    struct Constants {
-        static let apiUrl = "http://staging.pippoplearning.com/api/v3/digitalexperiences"
-        static let homedir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
-    }
-
+    @IBOutlet weak var ActivitySpinner: UIActivityIndicatorView!
+    
     @IBOutlet weak var MyCollectionView: UICollectionView!
 
     @IBOutlet weak var myPicker: UIPickerView!
@@ -49,6 +51,8 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.ActivitySpinner.hidden = true
+        self.ActivitySpinner.stopAnimating()
         loadData()
         println("\(self.description) loaded")
         // Do any additional setup after loading the view, typically from a nib.
@@ -60,19 +64,31 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
         updateLabel()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        self.navigationController?.navigationBar.hidden = false
+    }
+    
+    @IBAction func RefreshData(sender: AnyObject) {
+        self.ActivitySpinner.hidden = false
+        self.ActivitySpinner.startAnimating()
+        println("Getting fresh data")
+        println("No data plist. Run load remote data function")
+        var url = Constants.apiUrl
+        println("Constant is \(url)")
+        getJSON(url)
+    }
+    
     func loadData() {
+        self.ActivitySpinner.hidden = false
+        self.ActivitySpinner.startAnimating()
         println("Starting the loadData function")
-        var filepath  = "\(Constants.homedir)/data.plist";
-        var url = NSURL(fileURLWithPath: Constants.homedir, isDirectory: true);
-        url = url?.URLByAppendingPathComponent("data.plist");
         
-        if filemgr.fileExistsAtPath(filepath) {
-            println("LOADING SAVED DATA AT: "+filepath);
-            var data = NSData.dataWithContentsOfMappedFile(filepath) as! NSData;
-            self.JSONData = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary;
-            println(JSONData)
-            
-            let exps = JSONData["digitalexperiences"] as! NSArray
+        var filePath = Utility.createFilePathInDocsDir("data.plist")
+        var fileExists = Utility.checkIfFileExistsAtPath(filePath)
+        if fileExists {
+            println("File exists...")
+            var data = Utility.loadJSONDataAtFilePath(filePath)
+            let exps = data["digitalexperiences"] as! NSArray
             self.totalData = exps
             println(exps.count)
             for exp in exps{
@@ -84,15 +100,16 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
                     self.allImages.append(img)
                     var title = exp["title"] as! String
                     self.allTitles.append(title)
-                    
                 }
             }
+            self.ActivitySpinner.stopAnimating()
+            self.ActivitySpinner.hidden = true
             return;
-        }
-        else{
-            println("No subject plist. Run load remote data function")
+
+        
+        } else {
             var url = Constants.apiUrl
-            println("Constant is \(url)")
+            println("File doesn't exist locally. Constant is \(url)")
             getJSON(url)
         }
     }
@@ -146,48 +163,28 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    
     func getJSON(api:String) {
         let url = NSURL(string: api)!
         let request = NSMutableURLRequest(URL: url)
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { (data: NSData!, response: NSURLResponse!, error: NSError!) in
-            
             if error != nil {
                 println("Error hitting API")
                 return
             } else {
                 println("Received data...\(data)")
-                //                println(NSString(data: data, encoding: NSUTF8StringEncoding))
-                var encodedJSON:NSDictionary = self.dataToJSON(data)
-                
-                var url = NSURL(fileURLWithPath: Constants.homedir, isDirectory: true);
-                url = url?.URLByAppendingPathComponent("data.plist");
-                var data = NSKeyedArchiver.archivedDataWithRootObject(encodedJSON);
-                println("SAVE: \(url) - (\(data.writeToURL(url!, atomically: true)))");
-                println("JSON data is \(data)")
-                
-                println("encoded JSON : \(encodedJSON)")
+                //println(NSString(data: data, encoding: NSUTF8StringEncoding))
+                var encodedJSON:NSDictionary = Utility.dataToJSON(data)
+                Utility.saveJSONWithArchiver(encodedJSON, savedName: "data")
                 self.loadData()
-                
+                self.ActivitySpinner.stopAnimating()
+                self.ActivitySpinner.hidden = true
             }
         }
-        
         task.resume()
+        
     }
-    
-    func dataToJSON(data: NSData) -> NSDictionary{
-        var cleanDict = NSDictionary()
-        if let dict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error:nil) as? NSDictionary {
-            cleanDict = dict
-            //            println("Converted to JSON: \(cleanDict)")
-            
-        } else {
-            println("Could not read JSON dictionary")
-        }
-        return cleanDict
-    }
-    
+        
 }
 

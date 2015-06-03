@@ -14,6 +14,7 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
     @IBAction func Upload(sender: AnyObject) {
         uploadToS3()
     }
+    @IBOutlet weak var ShareButtonLabel: UIButton!
     
     @IBOutlet weak var TotalImage: UIImageView!
     
@@ -85,7 +86,7 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
         
         let activityViewController = UIActivityViewController(activityItems: sharingItems, applicationActivities: nil)
         activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard,UIActivityTypeAirDrop,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePostToTencentWeibo,UIActivityTypePostToVimeo,UIActivityTypePrint,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToWeibo]
-        activityViewController.popoverPresentationController!.sourceView = view.superview;
+        activityViewController.popoverPresentationController!.sourceView = self.ShareButtonLabel;
         
         self.presentViewController(activityViewController, animated: true, completion: nil)
     }

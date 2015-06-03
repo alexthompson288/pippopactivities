@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+var learnerNames = [String]()
+var learnerIDs = [Int]()
 
 class LoginController:UIViewController, UITextFieldDelegate {
     
@@ -38,16 +40,25 @@ class LoginController:UIViewController, UITextFieldDelegate {
             updateUI()
         }
     }
+    
+    var menuScreen = false{
+        didSet{
+            updateUI()
+        }
+    }
+    
     var token:String = ""
     var savedEmail:String?
 
     override func viewDidAppear(animated: Bool) {
-
+        self.navigationController?.navigationBar.hidden = true
         savedEmail = NSUserDefaults.standardUserDefaults().objectForKey("email") as? String
         if let mySavedEmail = savedEmail {
-            println("About to perform segue")
-            performSegueWithIdentifier("LoginToActivitiesSegue", sender: self)
-            println("Finding saved email from NSUserDefaults \(mySavedEmail)")
+            if savedEmail != ""{
+                println("About to perform segue")
+                performSegueWithIdentifier("LoginToActivitiesSegue", sender: self)
+                println("Finding saved email from NSUserDefaults \(mySavedEmail)")
+            }
         }
     }
     
@@ -68,7 +79,6 @@ class LoginController:UIViewController, UITextFieldDelegate {
             self.RegisterEmailField.alpha = visible
             self.RegisterPasswordField.alpha = visible
             self.LoginRegisterButtonLabel.titleLabel!.text = "Register"
-
         }
     }
     
@@ -84,23 +94,6 @@ class LoginController:UIViewController, UITextFieldDelegate {
         } else {
             self.loginScreen = true
         }
-    }
-    
-    func hideLoginItems(){
-        println("Need to hide login now...")
-    }
-    
-    func showLoginItems(){
-        println("Need to show login now...")
-    }
-    
-    func hideRegisterItems(){
-        println("Need to hide register now...")
-    }
-    
-    func showRegisterItems(){
-        println("Need to show register now...")
-
     }
     
     @IBAction func LoginButton(sender: AnyObject) {
@@ -199,7 +192,6 @@ class LoginController:UIViewController, UITextFieldDelegate {
         }
     }
     
-    
     func logUserIn(){
         var email = ""
         var password = ""
@@ -214,6 +206,7 @@ class LoginController:UIViewController, UITextFieldDelegate {
         }
     }
     
+        
     func LogUserInRemote(email:String, password:String){
         let url = NSURL(string: "http://www.pippoplearning.com/api/v3/tokens")!
         let request = NSMutableURLRequest(URL: url)
@@ -230,16 +223,24 @@ class LoginController:UIViewController, UITextFieldDelegate {
                 return
             }
             var responseObject:NSDictionary?
-            responseObject = self.dataToJSON(data)
+            responseObject = Utility.dataToJSON(data)
             if let jsonDict = responseObject {
-                println("JSON Response is \(jsonDict)")
-                var access = jsonDict["access_token"] as! NSString
-                NSUserDefaults.standardUserDefaults().setObject(email, forKey: "email")
-                NSUserDefaults.standardUserDefaults().setObject(password, forKey: "password")
-                NSUserDefaults.standardUserDefaults().setObject(access, forKey: "access_token")
-                self.token = NSUserDefaults.standardUserDefaults().objectForKey("access_token") as! String
-                if self.token != ""{
-                    self.ErrorLabel.text = "Logged in"
+                var errors:Array<String>?
+                errors = jsonDict["errors"] as? Array
+                if let thisError = errors {
+                    println("Errors are \(errors)")
+                } else {
+                    var access = jsonDict["access_token"] as! NSString
+                    NSUserDefaults.standardUserDefaults().setObject(email, forKey: "email")
+                    NSUserDefaults.standardUserDefaults().setObject(password, forKey: "password")
+                    NSUserDefaults.standardUserDefaults().setObject(access, forKey: "access_token")
+                    self.token = NSUserDefaults.standardUserDefaults().objectForKey("access_token") as! String
+                    Utility.saveJSONWithArchiver(jsonDict, savedName: "userData.plist")
+                    println("JSON saved locally.")
+                    if self.token != ""{
+                        self.ErrorLabel.text = "Logged in"
+                    }
+                    self.performSegueWithIdentifier("LoginToActivitiesSegue", sender: self)
                 }
             }
             else{

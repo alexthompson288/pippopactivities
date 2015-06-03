@@ -26,6 +26,10 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="yX2-9w-RNj">
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="537"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityCellID" id="zXX-z5-LIK" customClass="ActivityCell" customModule="pippopactivities" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -73,15 +77,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="xED-LP-rPg">
-                        <barButtonItem key="rightBarButtonItem" title="Gallery" id="DFU-fV-WHu">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="DFU-fV-WHu">
                             <connections>
-                                <segue destination="vTb-P1-1f8" kind="show" id="dwO-WC-86v"/>
+                                <action selector="RefreshData:" destination="BYZ-38-t0r" id="yWQ-Qx-ftv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="ActivitySpinner" destination="yX2-9w-RNj" id="dcl-x0-AkQ"/>
                         <outlet property="MyCollectionView" destination="jUT-fn-ITu" id="ALl-PC-lJx"/>
                         <outlet property="myLabel" destination="vPZ-hF-pRu" id="HGH-EX-krf"/>
                         <outlet property="myPicker" destination="vf8-go-DO8" id="wLY-sh-ua6"/>
@@ -90,7 +95,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="703" y="632"/>
+            <point key="canvasLocation" x="891" y="644"/>
         </scene>
         <!--Activity Show Controller-->
         <scene sceneID="Esb-Hm-ZJA">
@@ -118,7 +123,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="clP-a8-H6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1802" y="632"/>
+            <point key="canvasLocation" x="2060" y="644"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="VvV-BA-byW">
@@ -129,7 +134,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i88-S0-e4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2890" y="-191"/>
+            <point key="canvasLocation" x="3184" y="-189"/>
         </scene>
         <!--Content View Controller-->
         <scene sceneID="35U-NT-VfE">
@@ -188,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VlQ-7f-iy8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2890" y="632"/>
+            <point key="canvasLocation" x="3184" y="644"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="ixy-iF-kCs">
@@ -291,30 +296,90 @@
                         <outlet property="RegisterEmailField" destination="Gby-5z-Cvd" id="E8z-nx-zdB"/>
                         <outlet property="RegisterParentField" destination="FMk-zE-eVk" id="Zjd-1l-C3G"/>
                         <outlet property="RegisterPasswordField" destination="I4o-GT-nO7" id="kEY-2I-EQg"/>
-                        <segue destination="meC-vm-c21" kind="show" identifier="LoginToActivitiesSegue" id="Bcs-gn-mA8"/>
+                        <segue destination="kl3-oS-WhT" kind="show" identifier="LoginToActivitiesSegue" id="c3v-q5-vjt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OlT-uE-HsG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-413" y="-273"/>
+            <point key="canvasLocation" x="-1032" y="-277"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="qGB-m7-UEu">
+        <!--Menu Controller-->
+        <scene sceneID="O0c-uJ-kEv">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="meC-vm-c21" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kZw-MR-uwk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
+                <viewController id="2QB-SA-u0v" customClass="MenuController" customModule="pippopactivities" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4E0-CT-IAR"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zr3-CT-zsH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="w9o-Tv-Phj">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leK-Qa-l1e">
+                                <rect key="frame" x="489" y="177" width="62" height="30"/>
+                                <state key="normal" title="Activities">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="ixB-5I-yvX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrn-OR-UiH">
+                                <rect key="frame" x="497" y="254" width="48" height="30"/>
+                                <state key="normal" title="Gallery">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="bVp-Wb-yaG" kind="show" id="3Qy-0J-efz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZL-Gh-Ge3">
+                                <rect key="frame" x="642" y="383" width="49" height="30"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="LogoutButton:" destination="2QB-SA-u0v" eventType="touchUpInside" id="Jsp-Ma-Kd3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cA4-q3-OzI">
+                                <rect key="frame" x="314" y="383" width="105" height="30"/>
+                                <state key="normal" title="Change learner">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="ChangeLearner:" destination="2QB-SA-u0v" eventType="touchUpInside" id="hBv-2o-yDR"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loggged in as Alex" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ee1-xx-jiW">
+                                <rect key="frame" x="140" y="387" width="147" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mE7-Ut-x7Z">
+                                <rect key="frame" x="473" y="311" width="95" height="30"/>
+                                <state key="normal" title="Gallery create">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="vTb-P1-1f8" kind="show" id="zOh-l5-k1U"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.96375605121119667" blue="0.29602551992434745" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5kG-TK-7Ad"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="liD-KI-6Pk"/>
+                        <outlet property="LoggedInAsLabel" destination="Ee1-xx-jiW" id="7OG-Ia-N79"/>
+                        <segue destination="iUh-WI-I0F" kind="show" identifier="MenuToLoginSegue" id="kyy-NN-szh"/>
                     </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DA4-RI-QcR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AZ5-J6-ElS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-575" y="656"/>
+            <point key="canvasLocation" x="-232" y="644"/>
         </scene>
         <!--Gallery Create Controller-->
         <scene sceneID="nDL-73-bMP">
@@ -372,12 +437,13 @@
                     <connections>
                         <outlet property="BackgroundCertificate" destination="h2I-56-jNb" id="sgS-Jp-Ug6"/>
                         <outlet property="PhotoImage" destination="T21-V0-IXs" id="Kgs-cT-ZET"/>
+                        <outlet property="ShareButtonLabel" destination="g2U-Kq-p8j" id="jMd-qn-IRl"/>
                         <outlet property="TotalImage" destination="4Ht-yL-ngr" id="KT0-nx-Anm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="flT-8z-qDt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="703" y="1550"/>
+            <point key="canvasLocation" x="971" y="1661"/>
         </scene>
         <!--Gallery Index Controller-->
         <scene sceneID="Jge-4G-69o">
@@ -435,7 +501,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qJM-ob-q8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1826" y="1578"/>
+            <point key="canvasLocation" x="-244" y="1637"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="GgN-jI-42G">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kl3-oS-WhT" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4Ak-Rb-yxA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2QB-SA-u0v" kind="relationship" relationship="rootViewController" id="khe-2D-ZPS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C9S-aa-Gh3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1338" y="644"/>
         </scene>
     </scenes>
     <resources>
@@ -443,6 +527,6 @@
         <image name="pippopbg1" width="2445" height="1834"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dwO-WC-86v"/>
+        <segue reference="zOh-l5-k1U"/>
     </inferredMetricsTieBreakers>
 </document>

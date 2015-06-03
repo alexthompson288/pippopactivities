@@ -22,6 +22,10 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
         self.MyGalleryCollection.dataSource = self
     }
     
+    override func viewDidAppear(animated: Bool) {
+        self.navigationController?.navigationBar.hidden = false
+    }
+    
     override func didReceiveMemoryWarning() {
         println("Memory Warning")
     }
