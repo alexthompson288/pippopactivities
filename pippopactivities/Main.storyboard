@@ -17,11 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Activities Index" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pq9-2W-xDE">
+                                <rect key="frame" x="491" y="28" width="116" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jUT-fn-ITu">
-                                <rect key="frame" x="0.0" y="227" width="1024" height="537"/>
+                                <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                                 <color key="backgroundColor" red="1" green="0.87047011086781789" blue="0.168850909919389" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7Wc-D0-yKc">
-                                    <size key="itemSize" width="231" height="228"/>
+                                    <size key="itemSize" width="272" height="268"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -35,14 +41,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="231" height="228"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="272" height="268"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xoF-9y-njr">
-                                                    <rect key="frame" x="7" y="44" width="217" height="176"/>
+                                                    <rect key="frame" x="28" y="46" width="217" height="176"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SK0-9w-1Ni">
-                                                    <rect key="frame" x="8" y="14" width="215" height="22"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SK0-9w-1Ni">
+                                                    <rect key="frame" x="29" y="15" width="215" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -50,7 +56,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <color key="backgroundColor" red="0.99215686270000003" green="0.42910628225111513" blue="0.14199529831554439" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.99607843137254903" green="0.85098039215686272" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="ActivityImage" destination="xoF-9y-njr" id="3aA-rY-TB1"/>
                                             <outlet property="ActivityTitle" destination="SK0-9w-1Ni" id="l7p-Eg-GHl"/>
@@ -58,21 +64,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Activities Index" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pq9-2W-xDE">
-                                <rect key="frame" x="491" y="28" width="116" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vf8-go-DO8">
-                                <rect key="frame" x="0.0" y="64" width="1024" height="162"/>
-                            </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose a stage:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPZ-hF-pRu">
-                                <rect key="frame" x="16" y="93" width="340" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -88,14 +79,12 @@
                     <connections>
                         <outlet property="ActivitySpinner" destination="yX2-9w-RNj" id="dcl-x0-AkQ"/>
                         <outlet property="MyCollectionView" destination="jUT-fn-ITu" id="ALl-PC-lJx"/>
-                        <outlet property="myLabel" destination="vPZ-hF-pRu" id="HGH-EX-krf"/>
-                        <outlet property="myPicker" destination="vf8-go-DO8" id="wLY-sh-ua6"/>
                         <segue destination="pHo-GE-ZMy" kind="show" identifier="ActivityIndexToShowSegue" id="PFW-vH-YqZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="891" y="644"/>
+            <point key="canvasLocation" x="1002" y="644"/>
         </scene>
         <!--Activity Show Controller-->
         <scene sceneID="Esb-Hm-ZJA">
@@ -124,6 +113,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="clP-a8-H6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2060" y="644"/>
+        </scene>
+        <!--Certificate Show Controller-->
+        <scene sceneID="a9d-YV-a4s">
+            <objects>
+                <viewController storyboardIdentifier="CertificateShowID" id="e6t-NP-t1I" customClass="CertificateShowController" customModule="pippopactivities" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wxY-2L-AmV"/>
+                        <viewControllerLayoutGuide type="bottom" id="oY5-kg-Mpg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5zj-Mb-wbp">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Test title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4z-e2-yfq">
+                                <rect key="frame" x="219" y="120" width="179" height="61"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.89293365410000003" blue="0.30568025430000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MSR-V3-3kF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="891" y="1658"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="VvV-BA-byW">
@@ -195,6 +212,34 @@
             </objects>
             <point key="canvasLocation" x="3184" y="644"/>
         </scene>
+        <!--Gallery Content View Controller-->
+        <scene sceneID="2G6-3x-VcJ">
+            <objects>
+                <viewController storyboardIdentifier="GalleryContentViewController" id="X5M-Mg-EGX" customClass="GalleryContentViewController" customModule="pippopactivities" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="05R-EW-w3n"/>
+                        <viewControllerLayoutGuide type="bottom" id="H8U-Ru-Kbm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wpV-Dd-9dx">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HCC-MT-Qde">
+                                <rect key="frame" x="50" y="46" width="925" height="693"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.91214995809999999" blue="0.23843264310000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="ContentImage" destination="HCC-MT-Qde" id="Eeb-w7-AV9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WAu-F5-WO8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1962" y="1658"/>
+        </scene>
         <!--Login Controller-->
         <scene sceneID="ixy-iF-kCs">
             <objects>
@@ -216,10 +261,15 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="alex@alexjbthompson.com" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aP3-Lg-Frl">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aP3-Lg-Frl">
                                 <rect key="frame" x="400" y="205" width="224" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yFG-ZV-Bqj">
+                                <rect key="frame" x="400" y="243" width="224" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7E-AQ-7SJ">
                                 <rect key="frame" x="484" y="500" width="57" height="30"/>
@@ -248,30 +298,25 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="JoeCole10" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yFG-ZV-Bqj">
-                                <rect key="frame" x="400" y="243" width="224" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Parent email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gby-5z-Cvd">
                                 <rect key="frame" x="400" y="281" width="224" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Child name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QHW-Xz-3Lw">
                                 <rect key="frame" x="400" y="205" width="224" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Parent name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FMk-zE-eVk">
                                 <rect key="frame" x="400" y="243" width="224" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Parent password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4o-GT-nO7">
                                 <rect key="frame" x="400" y="321" width="224" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJV-t9-T7E">
                                 <rect key="frame" x="443" y="359" width="138" height="36"/>
@@ -282,12 +327,17 @@
                                     <action selector="LoginButton:" destination="iUh-WI-I0F" eventType="touchUpInside" id="0sm-Dp-QmX"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9pg-HS-lb9">
+                                <rect key="frame" x="502" y="374" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="ActivityIndicator" destination="9pg-HS-lb9" id="wKG-e3-65a"/>
+                        <outlet property="BottomLoginRegisterToggleLabel" destination="J7E-AQ-7SJ" id="uXT-7O-40e"/>
                         <outlet property="EmailField" destination="aP3-Lg-Frl" id="SuT-L8-py1"/>
                         <outlet property="ErrorLabel" destination="v0t-KJ-U27" id="Jmu-23-c4a"/>
                         <outlet property="LoginRegisterButtonLabel" destination="EJV-t9-T7E" id="XUK-D1-JZI"/>
@@ -443,7 +493,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="flT-8z-qDt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="971" y="1661"/>
+            <point key="canvasLocation" x="3069" y="1649"/>
         </scene>
         <!--Gallery Index Controller-->
         <scene sceneID="Jge-4G-69o">
@@ -497,6 +547,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="MyGalleryCollection" destination="pnr-Av-53H" id="34M-Pu-3Ct"/>
+                        <segue destination="e6t-NP-t1I" kind="show" identifier="GalleryIndexToShowSegue" id="r2i-9E-69y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qJM-ob-q8e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -527,6 +578,6 @@
         <image name="pippopbg1" width="2445" height="1834"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zOh-l5-k1U"/>
+        <segue reference="bq0-CF-9Ou"/>
     </inferredMetricsTieBreakers>
 </document>

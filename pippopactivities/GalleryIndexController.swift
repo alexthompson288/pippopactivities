@@ -14,10 +14,19 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
     
     var name = String()
     
-    var data = ["https://s3-us-west-2.amazonaws.com/pipresources/a_test_cert_01.jpg", "https://s3-us-west-2.amazonaws.com/pipresources/a_test_cert_02.jpg", "https://s3-us-west-2.amazonaws.com/pipresources/a_test_cert_03.jpg", "https://s3-us-west-2.amazonaws.com/pipresources/a_test_cert_04.jpg"]
+    var data = NSArray() {
+        didSet{
+            println("Data was set. Updating UI...")
+            updateUI()
+        }
+    }
+    var learnerID = Int()
     
     override func viewDidLoad() {
+        learnerID = NSUserDefaults.standardUserDefaults().objectForKey("learnerID") as! Int
+
         println("Gallery index view loaded")
+        getUserImages()
         self.MyGalleryCollection.delegate = self
         self.MyGalleryCollection.dataSource = self
     }
@@ -28,6 +37,17 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
     
     override func didReceiveMemoryWarning() {
         println("Memory Warning")
+    }
+    
+    func getUserImages(){
+        println("Getting user images function...")
+        var data = getUserImagesFromRails(learnerID)
+    }
+    
+    func updateUI(){
+        println("About to reload data")
+        self.MyGalleryCollection.reloadData()
+        println("Data reload function run")
     }
     
     
@@ -41,7 +61,7 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell: GalleryCell = collectionView.dequeueReusableCellWithReuseIdentifier("GalleryCellID", forIndexPath: indexPath) as! GalleryCell
-        var imagename = data[indexPath.row] as String
+        var imagename = data[indexPath.row] as! String
         println("Image name is \(imagename)")
         ImageLoader.sharedLoader.imageForUrl(imagename, completionHandler:{(image: UIImage?, url: String) in
             cell.GalleryImage.image = image
@@ -51,10 +71,53 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         println("Item \(data[indexPath.row]) Clicked")
-        var vc: ActivityShowController = self.storyboard?.instantiateViewControllerWithIdentifier("ActivityShowID") as! ActivityShowController
-        vc.name = data[indexPath.row]
-        performSegueWithIdentifier("ActivityIndexToShowSegue", sender: self)
+        var vc: CertificateShowController = self.storyboard?.instantiateViewControllerWithIdentifier("CertificateShowID") as! CertificateShowController
+        println("data we are setting is \(data)")
+        vc.activityData = self.data
+        println("Below is vc activity data")
+        println(vc.activityData)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func getUserImagesFromRails(learner:Int){
+        var myData = [""]
+        var success = false
+        let url = NSURL(string: Constants.LearnerImagesUrl)!
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = "{\n    \"learner_id\": \"\(learner)\"\n}".dataUsingEncoding(NSUTF8StringEncoding);
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { (data: NSData!, response: NSURLResponse!, error: NSError!) in
+            
+            if error != nil {
+                // Handle error...
+                return
+            }
+            var responseObject:NSDictionary?
+            responseObject = Utility.dataToJSON(data)
+            if let jsonDict = responseObject {
+                var errors:Array<String>?
+                errors = jsonDict["errors"] as? Array
+                if let thisError = errors {
+                    println("Errors are \(errors)")
+                } else {
+                    var imgs:NSArray?
+                    imgs = jsonDict["images"] as? NSArray
+                    if let imgsPresent = imgs{
+                        println("There are \(imgsPresent.count) images")
+                        self.data = imgsPresent
+                    }
+                    success = true
+                }
+            }
+            else{
+                println("problem in JSON")
+            }
+        }
+        task.resume()
+    }
+
     
     
 }

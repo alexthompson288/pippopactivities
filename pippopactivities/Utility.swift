@@ -69,4 +69,43 @@ class Utility {
         return filepath
     }
     
+    class func createRecordOnRails(learner: Int, digitalexperience: Int, image: String) -> Bool{
+        var success = false
+        let url = NSURL(string: Constants.RailsImageUrl)!
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = "{\n    \"learner_id\": \"\(learner)\",\"digitalexperience_id\": \"\(digitalexperience)\", \"url_image_remote\": \"\(image)\"\n}".dataUsingEncoding(NSUTF8StringEncoding);
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { (data: NSData!, response: NSURLResponse!, error: NSError!) in
+            
+            if error != nil {
+                // Handle error...
+                return
+            }
+            var responseObject:NSDictionary?
+            responseObject = Utility.dataToJSON(data)
+            if let jsonDict = responseObject {
+                var errors:Array<String>?
+                errors = jsonDict["errors"] as? Array
+                if let thisError = errors {
+                    println("Errors are \(errors)")
+                } else {
+                    success = true
+                }
+            }
+            else{
+                println("problem in JSON")
+            }
+        }
+        task.resume()
+        
+        return success
+    }
+    
+    class func condenseWhiteSpace(string: String) -> String {
+        let components = string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).filter({!isEmpty($0)})
+        return join(" ", components)
+    }
+    
 }

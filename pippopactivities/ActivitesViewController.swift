@@ -8,18 +8,13 @@
 
 import UIKit
 
-struct Constants {
-    static let apiUrl = "http://staging.pippoplearning.com/api/v3/digitalexperiences"
-    static let homedir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
-}
 
-class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate {
+
+class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var ActivitySpinner: UIActivityIndicatorView!
     
     @IBOutlet weak var MyCollectionView: UICollectionView!
-
-    @IBOutlet weak var myPicker: UIPickerView!
     
     @IBOutlet weak var myLabel: UILabel!
 
@@ -41,13 +36,13 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
         case topping = 1
     }
     
-    func updateLabel(){
-        var sizeComponent = PickerComponent.size.rawValue
-        let toppingComponent = PickerComponent.topping.rawValue
-        let size = pickerData[sizeComponent][myPicker.selectedRowInComponent(sizeComponent)]
-        let topping = pickerData[toppingComponent][myPicker.selectedRowInComponent(toppingComponent)]
-        myLabel.text = "Pizza: " + size + " " + topping
-    }
+//    func updateLabel(){
+//        var sizeComponent = PickerComponent.size.rawValue
+//        let toppingComponent = PickerComponent.topping.rawValue
+//        let size = pickerData[sizeComponent][myPicker.selectedRowInComponent(sizeComponent)]
+//        let topping = pickerData[toppingComponent][myPicker.selectedRowInComponent(toppingComponent)]
+//        myLabel.text = "Pizza: " + size + " " + topping
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,10 +53,11 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
         // Do any additional setup after loading the view, typically from a nib.
         self.MyCollectionView.delegate = self
         self.MyCollectionView.dataSource = self
-        myPicker.delegate = self
-        myPicker.dataSource = self
-        myPicker.selectRow(2, inComponent: PickerComponent.size.rawValue, animated: false)
-        updateLabel()
+        self.MyCollectionView.contentOffset = CGPointZero
+//        myPicker.delegate = self
+//        myPicker.dataSource = self
+//        myPicker.selectRow(2, inComponent: PickerComponent.size.rawValue, animated: false)
+//        updateLabel()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -73,6 +69,7 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
         self.ActivitySpinner.startAnimating()
         println("Getting fresh data")
         println("No data plist. Run load remote data function")
+        self.totalData = []
         var url = Constants.apiUrl
         println("Constant is \(url)")
         getJSON(url)
@@ -90,11 +87,15 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
             var data = Utility.loadJSONDataAtFilePath(filePath)
             let exps = data["digitalexperiences"] as! NSArray
             self.totalData = exps
-            println(exps.count)
+            println("Number of experiences is \(exps.count)")
+            self.allImages = []
+            self.allTitles = []
+            
             for exp in exps{
-                println(exp)
+//                println(exp)
                 var imgString = exp["url_image_remote"] as! String
                 if imgString != ""{
+                    
                     var img = exp["url_image_remote"] as! String
                     self.MyCollectionView.reloadData()
                     self.allImages.append(img)
@@ -114,20 +115,20 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        updateLabel()
-    }
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return pickerData.count
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData[component].count
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return pickerData[component][row]
-    }
+//    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        updateLabel()
+//    }
+//    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+//        return pickerData.count
+//    }
+//    
+//    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        return pickerData[component].count
+//    }
+//    
+//    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+//        return pickerData[component][row]
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
