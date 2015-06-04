@@ -62,10 +62,27 @@ class ActivityShowController: UIViewController, UIPageViewControllerDataSource {
         
         vc.imageFile = self.activityData[index]["url_image_remote"] as! String
         vc.titleText = self.activityData[index]["title"] as! String
-        var video = self.activityData[index]["url_video_remote"] as! String
-        println("video value is \(video)")
-        vc.mediaFile = video
+        var videoFile = self.activityData[index]["url_video_remote"] as! String
+        var audioFile = self.activityData[index]["url_audio_remote"] as! String
+        var storyText: String?
+        storyText = self.activityData[index]["storytext"] as! String
+        if let story = storyText {
+            vc.storyText = story
+        }
+        vc.mediaFile = ""
         vc.pageIndex = index
+        
+        if videoPresent == true {
+            vc.mediaType = "video"
+            vc.mediaFile = videoFile
+        } else if audioPresent == true {
+            vc.mediaType = "audio"
+            vc.mediaFile = audioFile
+        } else if certificatePresent == true {
+            vc.mediaType = "certificate"
+        } else {
+            vc.mediaType = "unknown"
+        }
         
         if vc.pageIndex == activityData.count - 1 {
             vc.galleryButtonAlpha = 1.0

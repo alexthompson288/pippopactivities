@@ -28,17 +28,23 @@ class MenuController: UIViewController {
         if dataPresent{
             var data = Utility.loadJSONDataAtFilePath(filepath)
             learners = data["learners"] as! NSArray
-            for learner in learners {
-                var name: String = learner["name"] as! String
-                println("Learner name is \(name)")
+            if let currentLearner = NSUserDefaults.standardUserDefaults().objectForKey("learnerID") as? Int {
+                self.learnerID = currentLearner
+                self.learnerName = NSUserDefaults.standardUserDefaults().objectForKey("learnerName") as? String
+            } else {
+                for learner in learners {
+                    var name: String = learner["name"] as! String
+                    println("Learner name is \(name)")
+                }
+                var firstLearner:NSDictionary = learners[0] as! NSDictionary
+                var name = firstLearner["name"] as! String
+                var id = firstLearner["id"] as! Int
+                NSUserDefaults.standardUserDefaults().setObject(name, forKey: "learnerName")
+                NSUserDefaults.standardUserDefaults().setObject(id, forKey: "learnerID")
+                learnerName = NSUserDefaults.standardUserDefaults().objectForKey("learnerName") as? String
             }
-            var firstLearner:NSDictionary = learners[0] as! NSDictionary
-            var name = firstLearner["name"] as! String
-            var id = firstLearner["id"] as! Int
-            NSUserDefaults.standardUserDefaults().setObject(name, forKey: "learnerName")
-            NSUserDefaults.standardUserDefaults().setObject(id, forKey: "learnerID")
         }
-        var learnerName = NSUserDefaults.standardUserDefaults().objectForKey("learnerName") as? String
+        
         if let name = learnerName {
             self.LoggedInAsLabel.text = "Logged in as \(name)"
         }
@@ -71,9 +77,11 @@ class MenuController: UIViewController {
     }
     
     @IBAction func LogoutButton(sender: AnyObject) {
-        NSUserDefaults.standardUserDefaults().setObject("", forKey: "email")
-        NSUserDefaults.standardUserDefaults().setObject("", forKey: "password")
-        NSUserDefaults.standardUserDefaults().setObject("", forKey: "access_token")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("email")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("password")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("access_token")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("learnerID")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("learnerName")
         performSegueWithIdentifier("MenuToLoginSegue", sender: self)
     }
     

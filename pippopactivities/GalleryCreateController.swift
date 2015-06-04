@@ -86,7 +86,7 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
         UIGraphicsEndImageContext()
         let image1 = self.TotalImage.image
         
-        var avc:UIActivityViewController = Utility.socialShare(sharingText: "Just hit! Beat it! #SwypI", sharingImage: image1, sharingURL: NSURL(string: "http://itunes.apple.com/app/"))
+        var avc:UIActivityViewController = Utility.socialShare(sharingText: "Come join us learning with Pip", sharingImage: image1, sharingURL: NSURL(string: "http://www.pippoplearning.com/"))
         avc.popoverPresentationController!.sourceView = self.ShareButtonLabel;
 
 //        let activity = activityViewController(activityItems: [image1 as! UIImage], applicationActivities: nil)
