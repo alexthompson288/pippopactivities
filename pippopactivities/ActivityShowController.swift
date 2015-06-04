@@ -55,6 +55,11 @@ class ActivityShowController: UIViewController, UIPageViewControllerDataSource {
         
         var vc: ContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ContentViewController") as! ContentViewController
         
+        
+        var videoPresent = self.activityData[index]["video_present"] as! Bool
+        var audioPresent = self.activityData[index]["audio_present"] as! Bool
+        var certificatePresent = self.activityData[index]["certificate_present"] as! Bool
+        
         vc.imageFile = self.activityData[index]["url_image_remote"] as! String
         vc.titleText = self.activityData[index]["title"] as! String
         var video = self.activityData[index]["url_video_remote"] as! String

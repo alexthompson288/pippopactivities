@@ -286,6 +286,8 @@ class LoginController:UIViewController, UITextFieldDelegate {
                 if let thisError = errors {
                     println("Errors are \(errors)")
                     self.ActivityIndicator.stopAnimating()
+                    self.ActivityIndicator.hidden = true
+                    return
                 } else {
                     var access = jsonDict["access_token"] as! NSString
                     NSUserDefaults.standardUserDefaults().setObject(email, forKey: "email")

@@ -126,15 +126,15 @@
 				D5E8EBDC1B1B364A00659ABE /* ActivitesViewController.swift */,
 				D55FA0731B1B4F0B00984662 /* ActivityShowController.swift */,
 				D55FA0791B1B6B3800984662 /* ContentViewController.swift */,
-				D51B414B1B1F453B003760DA /* GalleryContentViewController.swift */,
 				D5E8EBFA1B1B38DA00659ABE /* ActivityCell.swift */,
 				D55FA07B1B1BB6BE00984662 /* LoginController.swift */,
 				D55FA07E1B1C742000984662 /* GalleryCell.swift */,
 				D5E181FD1B1D967300FBEAEA /* Constants.swift */,
 				D51B41461B1F0055003760DA /* Utility.swift */,
-				D51B41491B1F3C36003760DA /* CertificateShowController.swift */,
 				D55FA0751B1B526400984662 /* GalleryCreateController.swift */,
+				D51B41491B1F3C36003760DA /* CertificateShowController.swift */,
 				D55FA0771B1B52AF00984662 /* GalleryIndexController.swift */,
+				D51B414B1B1F453B003760DA /* GalleryContentViewController.swift */,
 				D55FA0801B1C769F00984662 /* ImageLoader.swift */,
 				D5E8EBE11B1B364A00659ABE /* Images.xcassets */,
 				D5E8EBE31B1B364A00659ABE /* LaunchScreen.xib */,
@@ -453,7 +453,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "pippopactivities/s3-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -467,7 +467,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "pippopactivities/s3-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

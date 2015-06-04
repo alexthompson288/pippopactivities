@@ -115,6 +115,28 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
+    func getJSON(api:String) {
+        let url = NSURL(string: api)!
+        let request = NSMutableURLRequest(URL: url)
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { (data: NSData!, response: NSURLResponse!, error: NSError!) in
+            if error != nil {
+                println("Error hitting API")
+                return
+            } else {
+                println("Received data...\(data)")
+                //println(NSString(data: data, encoding: NSUTF8StringEncoding))
+                var encodedJSON:NSDictionary = Utility.dataToJSON(data)
+                Utility.saveJSONWithArchiver(encodedJSON, savedName: "data.plist")
+                self.loadData()
+                self.ActivitySpinner.stopAnimating()
+                self.ActivitySpinner.hidden = true
+            }
+        }
+        task.resume()
+    }
+    
 //    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 //        updateLabel()
 //    }
@@ -164,28 +186,6 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func getJSON(api:String) {
-        let url = NSURL(string: api)!
-        let request = NSMutableURLRequest(URL: url)
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { (data: NSData!, response: NSURLResponse!, error: NSError!) in
-            if error != nil {
-                println("Error hitting API")
-                return
-            } else {
-                println("Received data...\(data)")
-                //println(NSString(data: data, encoding: NSUTF8StringEncoding))
-                var encodedJSON:NSDictionary = Utility.dataToJSON(data)
-                Utility.saveJSONWithArchiver(encodedJSON, savedName: "data")
-                self.loadData()
-                self.ActivitySpinner.stopAnimating()
-                self.ActivitySpinner.hidden = true
-            }
-        }
-        task.resume()
-        
-    }
         
 }
 

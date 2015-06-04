@@ -18,6 +18,9 @@ class ContentViewController: UIViewController {
     
     @IBOutlet weak var PlayIcon: UIButton!
     
+    @IBOutlet weak var StoryTextLabel: UILabel!
+    
+    
     var pageIndex: Int!
     var titleText: String!
     var imageFile: String!

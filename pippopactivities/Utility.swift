@@ -46,8 +46,11 @@ class Utility {
     class func checkIfFileExistsAtPath(filepath: String) -> Bool {
         var filemgr = NSFileManager.defaultManager()
         if filemgr.fileExistsAtPath(filepath){
+            println("File does exist at \(filepath)")
             return true
         } else {
+            println("File does NOT exist at \(filepath)")
+
             return false
         }
     }
@@ -69,13 +72,13 @@ class Utility {
         return filepath
     }
     
-    class func createRecordOnRails(learner: Int, digitalexperience: Int, image: String) -> Bool{
+    class func createRecordOnRails(learner: Int, digitalexperience: Int, image: String, imageLocal: String) -> Bool{
         var success = false
         let url = NSURL(string: Constants.RailsImageUrl)!
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\n    \"learner_id\": \"\(learner)\",\"digitalexperience_id\": \"\(digitalexperience)\", \"url_image_remote\": \"\(image)\"\n}".dataUsingEncoding(NSUTF8StringEncoding);
+        request.HTTPBody = "{\n    \"learner_id\": \"\(learner)\",\"digitalexperience_id\": \"\(digitalexperience)\", \"url_image_remote\": \"\(image)\", \"url_image_local\": \"\(imageLocal)\"\n}".dataUsingEncoding(NSUTF8StringEncoding);
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { (data: NSData!, response: NSURLResponse!, error: NSError!) in
             
@@ -103,9 +106,40 @@ class Utility {
         return success
     }
     
+    class func saveFileOnDevice(fileName: String){
+        
+    }
+    
+    class func documentsPathForFileName(name: String) -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true);
+        let path = paths[0] as! String;
+        let fullPath = path.stringByAppendingPathComponent(name)
+        
+        return fullPath
+    }
+    
     class func condenseWhiteSpace(string: String) -> String {
         let components = string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).filter({!isEmpty($0)})
         return join(" ", components)
+    }
+    
+    class func socialShare(#sharingText: String?, sharingImage: UIImage?, sharingURL: NSURL?) -> UIActivityViewController {
+        var sharingItems = [AnyObject]()
+        
+        if let text = sharingText {
+            sharingItems.append(text)
+        }
+        if let image = sharingImage {
+            sharingItems.append(image)
+        }
+        if let url = sharingURL {
+            sharingItems.append(url)
+        }
+        
+        let activityViewController = UIActivityViewController(activityItems: sharingItems, applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard,UIActivityTypeAirDrop,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePostToTencentWeibo,UIActivityTypePostToVimeo,UIActivityTypePrint,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToWeibo]
+        
+        return activityViewController
     }
     
 }

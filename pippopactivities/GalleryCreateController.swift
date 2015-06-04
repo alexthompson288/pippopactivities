@@ -33,7 +33,6 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
         println("...")
         self.BackgroundCertificate.image = UIImage(named: "certificate")
         learnerID = NSUserDefaults.standardUserDefaults().objectForKey("learnerID") as! Int
-
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -77,25 +76,7 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
         PhotoImage.image = nil
     }
     
-    func socialShare(#sharingText: String?, sharingImage: UIImage?, sharingURL: NSURL?) {
-        var sharingItems = [AnyObject]()
-        
-        if let text = sharingText {
-            sharingItems.append(text)
-        }
-        if let image = sharingImage {
-            sharingItems.append(image)
-        }
-        if let url = sharingURL {
-            sharingItems.append(url)
-        }
-        
-        let activityViewController = UIActivityViewController(activityItems: sharingItems, applicationActivities: nil)
-        activityViewController.excludedActivityTypes = [UIActivityTypeCopyToPasteboard,UIActivityTypeAirDrop,UIActivityTypeAddToReadingList,UIActivityTypeAssignToContact,UIActivityTypePostToTencentWeibo,UIActivityTypePostToVimeo,UIActivityTypePrint,UIActivityTypeSaveToCameraRoll,UIActivityTypePostToWeibo]
-        activityViewController.popoverPresentationController!.sourceView = self.ShareButtonLabel;
-        
-        self.presentViewController(activityViewController, animated: true, completion: nil)
-    }
+    
     
     func share(){
         UIGraphicsBeginImageContext(BackgroundCertificate.bounds.size)
@@ -105,31 +86,37 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
         UIGraphicsEndImageContext()
         let image1 = self.TotalImage.image
         
-        socialShare(sharingText: "Just hit! Beat it! #SwypI", sharingImage: image1, sharingURL: NSURL(string: "http://itunes.apple.com/app/"))
+        var avc:UIActivityViewController = Utility.socialShare(sharingText: "Just hit! Beat it! #SwypI", sharingImage: image1, sharingURL: NSURL(string: "http://itunes.apple.com/app/"))
+        avc.popoverPresentationController!.sourceView = self.ShareButtonLabel;
+
 //        let activity = activityViewController(activityItems: [image1 as! UIImage], applicationActivities: nil)
 //        println("Trying to present activity controller")
 //        presentViewController(activity, animated: true, completion: nil)
+        self.presentViewController(avc, animated: true, completion: nil)
     }
     
     func uploadToS3(){
         var img:UIImage = TotalImage.image!
-        var time = NSDate()
-        
-        var path:NSString = NSTemporaryDirectory().stringByAppendingPathComponent("image.png")
-        var imageData:NSData = UIImagePNGRepresentation(img)
+//        var time = NSDate()
+        var random = Int(arc4random_uniform(99999))
+        var spaces3urlname = "\(self.learnerID)_\(random)_image.jpg"
+        var s3urlname = Utility.condenseWhiteSpace(spaces3urlname)
+        var path:NSString = NSTemporaryDirectory().stringByAppendingPathComponent("image.jpg")
+        var localPath:NSString = Utility.documentsPathForFileName(s3urlname)
+//        Changed from png to JPEG - PNG does not take a number
+        var imageData:NSData = UIImageJPEGRepresentation(img,0.7)
         imageData.writeToFile(path as String, atomically: true)
+        imageData.writeToFile(localPath as String, atomically: true)
         var url:NSURL = NSURL(fileURLWithPath: path as String)!
         println("Saved image to URL...")
         uploadRequest = AWSS3TransferManagerUploadRequest()
         uploadRequest?.bucket = Constants.BucketName
         println("DESCRIPTION OF UPLOAD REQUEST \(uploadRequest?.bucket)")
         uploadRequest?.ACL = AWSS3ObjectCannedACL.PublicRead
-        var random = Int(arc4random_uniform(99999))
-        var spaces3urlname = "\(self.learnerID)_\(random)_image.png"
-        var s3urlname = Utility.condenseWhiteSpace(spaces3urlname)
+        
         println("s3urlname is \(s3urlname)")
         uploadRequest?.key = "\(s3urlname)"
-        uploadRequest?.contentType = "image/png"
+        uploadRequest?.contentType = "image/jpg"
         uploadRequest?.body = url;
 
         uploadRequest?.uploadProgress = {[unowned self](bytesSent:Int64, totalBytesSent:Int64, totalBytesExpectedToSend:Int64) in
@@ -151,9 +138,9 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
                 NSLog("%@", task.error);
             }else{ // if there aren't any then the image is uploaded!
                 // this is the url of the image we just uploaded
-                var imageUrl = ("\(Constants.s3BaseUrl)/\(Constants.BucketName)/\(s3urlname)")
-                println("Image saved to \(imageUrl). And learner ID is \(String(self.learnerID)). And s3url is \(imageUrl)")
-                Utility.createRecordOnRails(self.learnerID, digitalexperience: 5, image: imageUrl)
+                var imageUrlRemote = ("\(Constants.s3BaseUrl)/\(Constants.BucketName)/\(s3urlname)")
+                println("Image saved to \(imageUrlRemote). And learner ID is \(String(self.learnerID)). And s3url is \(imageUrlRemote)")
+                Utility.createRecordOnRails(self.learnerID, digitalexperience: 5, image: imageUrlRemote, imageLocal: s3urlname)
             }
 //            self.removeLoadingView()
             return "all done";

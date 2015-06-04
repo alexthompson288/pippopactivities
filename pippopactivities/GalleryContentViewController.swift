@@ -20,9 +20,10 @@ class GalleryContentViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        ImageLoader.sharedLoader.imageForUrl(self.imageFile, completionHandler:{(image: UIImage?, url: String) in
-            self.ContentImage.image = image
-        })
-    }
+        let url = NSURL(string: imageFile)
+        println("Total url is \(url)")
+        let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
+        self.ContentImage.image = UIImage(named: imageFile)
 
+    }
 }
