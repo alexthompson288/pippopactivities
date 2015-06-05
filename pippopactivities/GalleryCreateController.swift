@@ -20,26 +20,40 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
     
     @IBOutlet weak var PhotoImage: UIImageView!
     
+    @IBOutlet weak var BackgroundCertificate: UIImageView!
+    
     var activityViewController = UIActivityViewController()
     
     var learnerID = Int()
+    var backgroundImageArray = ["ugc_image_1", "ugc_image_2", "ugc_image_3", "ugc_image_4", "ugc_image_5", "ugc_image_6", "ugc_image_7", "ugc_image_8", "ugc_image_9"]
     
     var uploadRequest:AWSS3TransferManagerUploadRequest?
     var filesize:Int64 = 0
     var amountUploaded:Int64 = 0
+    var randomImage = 0
+    
     
     override func viewDidLoad() {
-        println("Gallery create view loaded...")
-        println("...")
-        self.BackgroundCertificate.image = UIImage(named: "certificate")
-        learnerID = NSUserDefaults.standardUserDefaults().objectForKey("learnerID") as! Int
+          self.randomImage = Int(arc4random_uniform(9))
+//        println("Gallery create view loaded...")
+//        println("...")
+          self.BackgroundCertificate.image = UIImage(named: backgroundImageArray[self.randomImage])
+          learnerID = NSUserDefaults.standardUserDefaults().objectForKey("learnerID") as! Int
     }
     
     override func viewDidAppear(animated: Bool) {
+        println("View appeared function")
         self.navigationController?.navigationBar.hidden = false
     }
     
-    @IBOutlet weak var BackgroundCertificate: UIImageView!
+    
+    
+    @IBAction func ToggleBackgroundImage(sender: AnyObject) {
+        var newRandomImage = Int(arc4random_uniform(9))
+        self.randomImage = newRandomImage
+        self.BackgroundCertificate.image = UIImage(named: backgroundImageArray[self.randomImage])
+    }
+    
     
     @IBAction func GetPhotoButton(sender: AnyObject) {
         var imagePicker = UIImagePickerController()
@@ -68,7 +82,7 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
     func mergeImages(){
         UIGraphicsBeginImageContext(BackgroundCertificate.frame.size)
         BackgroundCertificate.image?.drawInRect(CGRect(x: 0, y: 0, width: BackgroundCertificate.frame.size.width, height: BackgroundCertificate.frame.size.height), blendMode: kCGBlendModeNormal, alpha: 1.0)
-        PhotoImage.image?.drawInRect(CGRect(x: 0, y: 0, width: PhotoImage.frame.size.width, height: PhotoImage.frame.size.height), blendMode: kCGBlendModeNormal, alpha: 1.0)
+        PhotoImage.image?.drawInRect(CGRect(x: 550, y: 100, width: PhotoImage.frame.size.width, height: PhotoImage.frame.size.height), blendMode: kCGBlendModeNormal, alpha: 1.0)
         BackgroundCertificate.image = UIGraphicsGetImageFromCurrentImageContext()
         self.TotalImage.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -104,7 +118,7 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
         var path:NSString = NSTemporaryDirectory().stringByAppendingPathComponent("image.jpg")
         var localPath:NSString = Utility.documentsPathForFileName(s3urlname)
 //        Changed from png to JPEG - PNG does not take a number
-        var imageData:NSData = UIImageJPEGRepresentation(img,0.7)
+        var imageData:NSData = UIImageJPEGRepresentation(img,1)
         imageData.writeToFile(path as String, atomically: true)
         imageData.writeToFile(localPath as String, atomically: true)
         var url:NSURL = NSURL(fileURLWithPath: path as String)!

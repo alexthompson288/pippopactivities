@@ -111,6 +111,7 @@ class LoginController:UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func LoginButton(sender: AnyObject) {
+        println("What is in register field \(self.RegisterChildField)")
         if self.loginScreen == true {
             FirstLoginUserFunction()
         } else {
@@ -119,28 +120,20 @@ class LoginController:UIViewController, UITextFieldDelegate {
     }
     
     func RegisterUser(){
-        if self.RegisterChildField == "" {
+        if self.RegisterChildField.text == "" {
             self.ErrorLabel.hidden = false
-            self.ErrorLabel.text = "Fill in name"
-        } else if self.RegisterParentField == ""{
+            self.ErrorLabel.text = "Fill in child name"
+        } else if self.RegisterParentField.text == ""{
             self.ErrorLabel.hidden = false
             self.ErrorLabel.text = "Fill in name"
         }
-        else if self.RegisterEmailField == ""{
+        else if self.RegisterEmailField.text == ""{
             self.ErrorLabel.hidden = false
             self.ErrorLabel.text = "Fill in email"
         }
-        else if self.RegisterPasswordField == ""{
+        else if self.RegisterPasswordField.text == ""{
             self.ErrorLabel.hidden = false
             self.ErrorLabel.text = "Fill in password"
-        }
-        else if self.RegisterChildField == ""{
-            self.ErrorLabel.hidden = false
-            self.ErrorLabel.text = "Fill in child name"
-        }
-        else if self.RegisterParentField == ""{
-            self.ErrorLabel.hidden = false
-            self.ErrorLabel.text = "Fill in parent name"
         }
         else {
             RegisterUserRemote(self.RegisterChildField.text, parent: self.RegisterParentField.text, email: self.RegisterEmailField.text, password: self.RegisterPasswordField.text)
@@ -197,10 +190,10 @@ class LoginController:UIViewController, UITextFieldDelegate {
     }
     
     func FirstLoginUserFunction(){
-        if self.EmailField == "" {
+        if self.EmailField.text == "" {
             self.ErrorLabel.hidden = false
             self.ErrorLabel.text = "Fill in email"
-        } else if self.PasswordField == ""{
+        } else if self.PasswordField.text == ""{
             self.ErrorLabel.text = "Fill in password"
         } else {
             LogUserInRemote(self.EmailField.text, password: self.PasswordField.text)
@@ -284,7 +277,9 @@ class LoginController:UIViewController, UITextFieldDelegate {
                 var errors:Array<String>?
                 errors = jsonDict["errors"] as? Array
                 if let thisError = errors {
-                    println("Errors are \(errors)")
+                    self.ErrorLabel.hidden = false
+                    println("Errors are \(thisError[0])")
+                    self.ErrorLabel.text = thisError[0]
                     self.ActivityIndicator.stopAnimating()
                     self.ActivityIndicator.hidden = true
                     return

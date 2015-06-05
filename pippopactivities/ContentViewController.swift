@@ -94,7 +94,6 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
             self.PlayIcon.alpha = 0.0
         }
         self.ContentTitle.text = self.titleText
-        self.ToGalleryButton.alpha = self.galleryButtonAlpha
         
     }
     

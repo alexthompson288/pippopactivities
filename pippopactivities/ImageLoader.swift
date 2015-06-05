@@ -11,9 +11,7 @@ import Foundation
 
 
 class ImageLoader {
-    
     var cache = NSCache()
-    
     class var sharedLoader : ImageLoader {
         struct Static {
             static let instance : ImageLoader = ImageLoader()
@@ -51,7 +49,6 @@ class ImageLoader {
             })
             downloadTask.resume()
         })
-        
     }
 }
 
