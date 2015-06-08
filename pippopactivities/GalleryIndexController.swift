@@ -29,8 +29,7 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
     
     override func viewDidLoad() {
         learnerID = NSUserDefaults.standardUserDefaults().objectForKey("learnerID") as! Int
-
-        println("Gallery index view loaded")
+        println("Gallery index view loaded. Learner ID is \(learnerID)")
         getUserImages()
         self.MyGalleryCollection.delegate = self
         self.MyGalleryCollection.dataSource = self
@@ -70,7 +69,6 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
         println("Data reload function run")
     }
     
-    
     @IBOutlet weak var MyGalleryCollection: UICollectionView!
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -79,7 +77,6 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
         return data.count
     }
     
-    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         println("Start of cell for item for \(indexPath.row)")
         var cell: GalleryCell = collectionView.dequeueReusableCellWithReuseIdentifier("GalleryCellID", forIndexPath: indexPath) as! GalleryCell
@@ -87,7 +84,7 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
         var imagePathRemote = data[indexPath.row]["url_image_remote"] as! String
         println("Image name is \(imageNameLocal)")
         var voteCount:Int = data[indexPath.row]["votecount"] as! Int
-        cell.VotecountLabel.text = "\(voteCount) stars"
+        cell.VotecountLabel.text = "\(voteCount)"
         var publicStatus = data[indexPath.row]["publicview"] as! Bool
         var filePathLocal = Utility.createFilePathInDocsDir(imageNameLocal)
         self.localImageArray.append(filePathLocal)
@@ -118,16 +115,7 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         println("Item \(data[indexPath.row]) Clicked")
-//        var vc: CertificateShowController = self.storyboard?.instantiateViewControllerWithIdentifier("CertificateShowID") as! CertificateShowController
-//        println("data we are setting is \(data)")
-//        vc.activityData = self.localImageArray as NSArray
-//        println("Below is vc activity data")
-//        println(vc.activityData)
-//        vc.indexNumber = indexPath.row
-//        self.navigationController?.pushViewController(vc, animated: true)
         
-        
-//        TESTING OUT SHOWING EACH IMAGE MODALLY
         var vc: GalleryImageShowController = self.storyboard?.instantiateViewControllerWithIdentifier("GalleryImageShowID") as! GalleryImageShowController
         var imageNameLocal = data[indexPath.row]["url_image_local"] as! String
         vc.dataDict = data[indexPath.row] as! NSDictionary
@@ -198,52 +186,5 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
         }
         task.resume()
     }
-    
-    
-    func getPublicImagesFromRails() {
-        var myData = [""]
-        let url = NSURL(string: Constants.LearnerImagesUrl)!
-        println("Public images url is \(Constants.LearnerImagesUrl)")
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let session = NSURLSession.sharedSession()
-        println("About to go out to network with PublicUserimagesFromRails")
-        let task = session.dataTaskWithRequest(request) { (data: NSData!, response: NSURLResponse!, error: NSError!) in
-            
-            if error != nil {
-                // Handle error...
-                return
-            }
-            var responseObject:NSDictionary?
-            responseObject = Utility.dataToJSON(data)
-            if let jsonDict = responseObject {
-                var errors:Array<String>?
-                errors = jsonDict["errors"] as? Array
-                if let thisError = errors {
-                    println("Errors are \(errors)")
-                } else {
-                    var imgs:NSArray?
-                    imgs = jsonDict["images"] as? NSArray
-                    if let imgsPresent = imgs{
-                        println("There are \(imgsPresent.count) images")
-                        self.data = imgsPresent
-                        println("Calling reload data on Collection...")
-                        println("this is what data looks like. Local image array \(self.localImageArray). Data array: \(self.data)")
-                        dispatch_async(dispatch_get_main_queue()){
-                            self.MyGalleryCollection.reloadData()
-                        }
-                    }
-                }
-            }
-            else{
-                println("problem in JSON")
-            }
-        }
-        task.resume()
-    }
-
-    
-
     
 }

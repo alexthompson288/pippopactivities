@@ -37,7 +37,7 @@ class GalleryImageShowController: UIViewController {
         println("Gallery show VC Loaded")
         println("Image file is \(self.imageFile))")
         println("Data dict is \(dataDict)")
-        self.learnerID = self.dataDict["learner_id"] as! Int
+        self.learnerID = NSUserDefaults.standardUserDefaults().objectForKey("learnerID") as! Int
         self.votestatus = self.dataDict["votestatus"] as! Bool
         self.imageRecordID = self.dataDict["id"] as! Int
         self.imagePublicViewStatus = self.dataDict["publicview"] as! Bool
@@ -58,10 +58,10 @@ class GalleryImageShowController: UIViewController {
     
     func submitStar(learnerId: Int, learnerimageId: Int){
         var urlString = "\(Constants.SubmitStar)"
-        println("Url String for deletion is \(urlString)")
+        println("Url String for submit star is \(urlString)")
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "DELETE"
+        request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         println("learner_id: \(learnerID),learnerimage_id: \(imageRecordID)")
         request.HTTPBody = "{\n    \"learner_id\": \(learnerID),\"learnerimage_id\": \(imageRecordID)\n}".dataUsingEncoding(NSUTF8StringEncoding);
@@ -135,7 +135,6 @@ class GalleryImageShowController: UIViewController {
     @IBAction func DeleteButton(sender: AnyObject) {
         println("About to delete")
         deleteImageRecordOnRails(self.learnerID, imageRecordId: self.imageRecordID)
-        
     }
     
     func toggleImageViewStatusOnRails(learner: Int, imageRecordId: Int, publicView: Bool){
