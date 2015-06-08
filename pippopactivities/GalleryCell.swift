@@ -13,5 +13,7 @@ class GalleryCell: UICollectionViewCell {
     
     @IBOutlet weak var GalleryImage: UIImageView!
     
+    @IBOutlet weak var PublicStatusLabel: UILabel!
     
+    @IBOutlet weak var VotecountLabel: UILabel!
 }

@@ -108,7 +108,7 @@ class Utility {
     
     class func deleteImageRecordOnRails(learner: Int, imageRecordId: Int) -> Bool{
         var success = false
-        var urlString = "\(Constants.RailsImageUrl)/\(imageRecordId)"
+        var urlString = "\(Constants.LearnerImagesUrl)/\(imageRecordId)"
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "DELETE"
@@ -144,7 +144,8 @@ class Utility {
     
     class func toggleImageViewStatusOnRails(learner: Int, imageRecordId: Int, publicView: Bool) -> Bool{
         var success = false
-        var urlString = "\(Constants.RailsImageUrl)/\(imageRecordId)"
+        var urlString = "\(Constants.LearnerImagesUrl)/\(imageRecordId)"
+        println("Toggle status url: \(urlString)")
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "PUT"
@@ -155,6 +156,7 @@ class Utility {
             
             if error != nil {
                 // Handle error...
+                println("Error in data in toggle status func")
                 return
             }
             var responseObject:NSDictionary?
@@ -165,6 +167,8 @@ class Utility {
                 if let thisError = errors {
                     println("Errors are \(errors)")
                 } else {
+                    println("Success in data in toggle status func")
+
                     success = true
                 }
             }

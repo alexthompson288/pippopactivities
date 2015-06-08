@@ -811,7 +811,7 @@
                                 <rect key="frame" x="0.0" y="83" width="1024" height="768"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NOm-Ru-mQv">
-                                    <size key="itemSize" width="217" height="208"/>
+                                    <size key="itemSize" width="217" height="264"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -821,21 +821,51 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="217" height="208"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="217" height="264"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RL8-QR-44i">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RL8-QR-44i">
                                                     <rect key="frame" x="0.0" y="0.0" width="217" height="208"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chs-E6-dZX">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="chs-E6-dZX">
                                                     <rect key="frame" x="0.0" y="0.0" width="217" height="208"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Public" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Dk-TA-akX">
+                                                    <rect key="frame" x="161" y="179" width="48" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="48" id="6CJ-Jz-67b"/>
+                                                        <constraint firstAttribute="height" constant="21" id="oaT-L9-Xgj"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="120 votes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSe-Os-55d">
+                                                    <rect key="frame" x="71" y="235" width="75" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="6I0-vn-qMV"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="1" green="0.49940960721441685" blue="0.4079656950993813" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="cSe-Os-55d" firstAttribute="centerX" secondItem="RL8-QR-44i" secondAttribute="centerX" id="ACT-39-k1e"/>
+                                            <constraint firstItem="cSe-Os-55d" firstAttribute="centerX" secondItem="chs-E6-dZX" secondAttribute="centerX" id="Ala-LF-Cy0"/>
+                                            <constraint firstItem="8Dk-TA-akX" firstAttribute="bottom" secondItem="B6a-RZ-9Fh" secondAttribute="bottomMargin" id="T1s-af-EiS"/>
+                                            <constraint firstItem="cSe-Os-55d" firstAttribute="centerX" secondItem="B6a-RZ-9Fh" secondAttribute="centerX" id="cba-X2-M3n"/>
+                                            <constraint firstItem="cSe-Os-55d" firstAttribute="bottom" secondItem="B6a-RZ-9Fh" secondAttribute="bottomMargin" id="h9o-a4-oXi"/>
+                                            <constraint firstItem="cSe-Os-55d" firstAttribute="top" secondItem="chs-E6-dZX" secondAttribute="bottom" constant="27" id="tt0-W4-FpD"/>
+                                            <constraint firstItem="8Dk-TA-akX" firstAttribute="trailing" secondItem="B6a-RZ-9Fh" secondAttribute="trailingMargin" id="wA5-kQ-d4e"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="GalleryImage" destination="chs-E6-dZX" id="8M2-IJ-1pQ"/>
+                                            <outlet property="PublicStatusLabel" destination="8Dk-TA-akX" id="QUW-jQ-ZyT"/>
+                                            <outlet property="VotecountLabel" destination="cSe-Os-55d" id="VDq-IU-VGY"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -846,6 +876,9 @@
                                     <segment title="My images"/>
                                     <segment title="See the world!"/>
                                 </segments>
+                                <connections>
+                                    <action selector="SegmentImagesButton:" destination="bVp-Wb-yaG" eventType="valueChanged" id="g4Y-yV-bo1"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -854,6 +887,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="MyGalleryCollection" destination="pnr-Av-53H" id="34M-Pu-3Ct"/>
+                        <outlet property="SegmentImagesLabel" destination="OuA-sU-LZ0" id="dta-hG-HSd"/>
                         <segue destination="e6t-NP-t1I" kind="show" identifier="GalleryIndexToShowSegue" id="r2i-9E-69y"/>
                     </connections>
                 </viewController>
@@ -876,6 +910,15 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gUH-SZ-b2s">
                                 <rect key="frame" x="0.0" y="28" width="600" height="522"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TkO-hz-TBa">
+                                <rect key="frame" x="544" y="562" width="40" height="30"/>
+                                <state key="normal" title="Share">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="ShareButton:" destination="oXF-sb-XWI" eventType="touchUpInside" id="Vbe-VN-bCu"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JeI-k2-u1k">
                                 <rect key="frame" x="16" y="562" width="44" height="30"/>
                                 <state key="normal" title="Delete">
@@ -891,13 +934,13 @@
                                     <action selector="SwitchViewStatus:" destination="oXF-sb-XWI" eventType="valueChanged" id="Egb-ib-iHI"/>
                                 </connections>
                             </switch>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TkO-hz-TBa">
-                                <rect key="frame" x="544" y="562" width="40" height="30"/>
-                                <state key="normal" title="Share">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vm6-Mm-9a4">
+                                <rect key="frame" x="415" y="562" width="30" height="30"/>
+                                <state key="normal" title="Star">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="ShareButton:" destination="oXF-sb-XWI" eventType="touchUpInside" id="Vbe-VN-bCu"/>
+                                    <action selector="StarAction:" destination="oXF-sb-XWI" eventType="touchUpInside" id="jPW-QL-hWr"/>
                                 </connections>
                             </button>
                         </subviews>

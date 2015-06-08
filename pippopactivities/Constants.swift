@@ -16,6 +16,7 @@ struct Constants {
     static let RailsImageUrl = "http://staging.pippoplearning.com/api/v3/learnerimagecreate"
     static let TokenUrl = "http://staging.pippoplearning.com/api/v3/tokens"
     static let LearnerImagesUrl = "http://staging.pippoplearning.com/api/v3/learnerimages"
+    static let SubmitStar = "http://staging.pippoplearning.com/api/v3/learnervotes"
 }
 
 let CognitoRegionType = AWSRegionType.EUWest1
