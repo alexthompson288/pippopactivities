@@ -136,13 +136,12 @@ class LoginController:UIViewController, UITextFieldDelegate {
     
     @IBAction func LoginButton(sender: AnyObject) {
         println("What is in register field \(self.RegisterChildField)")
-        self.moviePlayer.play()
-
-//        if self.loginScreen == true {
-//            FirstLoginUserFunction()
-//        } else {
-//            RegisterUser()
-//        }
+    
+        if self.loginScreen == true {
+            FirstLoginUserFunction()
+        } else {
+            RegisterUser()
+        }
     }
     
     func RegisterUser(){
