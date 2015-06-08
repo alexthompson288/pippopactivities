@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MediaPlayer
 
 var learnerNames = [String]()
 var learnerIDs = [Int]()
@@ -37,6 +38,8 @@ class LoginController:UIViewController, UITextFieldDelegate {
     var visible:CGFloat = 1.0
     var invisible:CGFloat = 0.0
     
+    var moviePlayer = MPMoviePlayerController()
+    
     
     var loginScreen = true{
         didSet{
@@ -52,6 +55,29 @@ class LoginController:UIViewController, UITextFieldDelegate {
     
     var token:String = ""
     var savedEmail:String?
+    
+    override func viewDidLoad() {
+        
+        var urlpath = NSBundle.mainBundle().URLForResource("home_video2", withExtension: "mp4")
+        println("url path is \(urlpath)")
+        self.moviePlayer = MPMoviePlayerController(contentURL: urlpath!)
+        self.moviePlayer.shouldAutoplay = true
+        self.moviePlayer.setFullscreen(false, animated: true)
+        self.moviePlayer.controlStyle = MPMovieControlStyle.None
+        self.moviePlayer.scalingMode = MPMovieScalingMode.AspectFit
+        self.moviePlayer.repeatMode = MPMovieRepeatMode.One
+        self.moviePlayer.view.frame = self.view.bounds
+        self.view.addSubview(self.moviePlayer.view)
+        self.view.sendSubviewToBack(moviePlayer.view)
+        
+        self.PasswordField.delegate = self
+        self.EmailField.delegate = self
+        self.RegisterPasswordField.delegate = self
+        self.loginScreen = true
+        println("Login controller")
+        //        AttemptLoginWithLocalDetails()
+    }
+    
 
     override func viewDidAppear(animated: Bool) {
         self.navigationController?.navigationBar.hidden = true
@@ -66,6 +92,14 @@ class LoginController:UIViewController, UITextFieldDelegate {
                 println("Finding saved email from NSUserDefaults \(mySavedEmail)")
             }
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.moviePlayer.play()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.moviePlayer.stop()
     }
     
     func updateUI(){
@@ -92,16 +126,6 @@ class LoginController:UIViewController, UITextFieldDelegate {
         }
     }
     
-    
-    override func viewDidLoad() {
-        self.PasswordField.delegate = self
-        self.EmailField.delegate = self
-        self.RegisterPasswordField.delegate = self
-        self.loginScreen = true
-        println("Login controller")
-//        AttemptLoginWithLocalDetails()
-    }
-    
     @IBAction func RegisterLoginToggleButton(sender: AnyObject) {
         if self.loginScreen == true {
             self.loginScreen = false
@@ -112,11 +136,13 @@ class LoginController:UIViewController, UITextFieldDelegate {
     
     @IBAction func LoginButton(sender: AnyObject) {
         println("What is in register field \(self.RegisterChildField)")
-        if self.loginScreen == true {
-            FirstLoginUserFunction()
-        } else {
-            RegisterUser()
-        }
+        self.moviePlayer.play()
+
+//        if self.loginScreen == true {
+//            FirstLoginUserFunction()
+//        } else {
+//            RegisterUser()
+//        }
     }
     
     func RegisterUser(){

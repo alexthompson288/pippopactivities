@@ -65,11 +65,7 @@ class ActivityShowController: UIViewController, UIPageViewControllerDataSource {
         vc.titleText = self.activityData[index]["title"] as! String
         var videoFile = self.activityData[index]["url_video_remote"] as! String
         var audioFile = self.activityData[index]["url_audio_remote"] as! String
-        var storyText: String?
-        storyText = self.activityData[index]["storytext"] as! String
-        if let story = storyText {
-            vc.storyText = story
-        }
+        
         vc.mediaFile = ""
         vc.pageIndex = index
         

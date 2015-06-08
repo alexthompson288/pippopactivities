@@ -16,8 +16,6 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
     
     @IBOutlet weak var PlayIcon: UIButton!
     
-    @IBOutlet weak var StoryTextLabel: UILabel!
-    
     @IBOutlet weak var TotalImage: UIImageView!
     
     @IBOutlet weak var LearnerImage: UIImageView!
@@ -88,8 +86,6 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
         ImageLoader.sharedLoader.imageForUrl(self.imageFile, completionHandler:{(image: UIImage?, url: String) in
             self.ContentImage.image = image
         })
-        
-        self.StoryTextLabel.text = storyText
         
         if mediaType == "video"{
             println("VIDEO PAGE")

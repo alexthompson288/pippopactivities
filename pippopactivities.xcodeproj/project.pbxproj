@@ -12,6 +12,9 @@
 		D51B41471B1F0055003760DA /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B41461B1F0055003760DA /* Utility.swift */; };
 		D51B414A1B1F3C36003760DA /* CertificateShowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B41491B1F3C36003760DA /* CertificateShowController.swift */; };
 		D51B414C1B1F453B003760DA /* GalleryContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B414B1B1F453B003760DA /* GalleryContentViewController.swift */; };
+		D5202D9D1B26509D00D24771 /* home_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D5202D9C1B26501300D24771 /* home_video.mp4 */; };
+		D5202D9F1B26550700D24771 /* home_video1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D5202D9E1B26550100D24771 /* home_video1.mp4 */; };
+		D5202DA11B26555F00D24771 /* home_video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D5202DA01B26555700D24771 /* home_video2.mp4 */; };
 		D55FA0741B1B4F0B00984662 /* ActivityShowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FA0731B1B4F0B00984662 /* ActivityShowController.swift */; };
 		D55FA0761B1B526400984662 /* GalleryCreateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FA0751B1B526400984662 /* GalleryCreateController.swift */; };
 		D55FA0781B1B52AF00984662 /* GalleryIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FA0771B1B52AF00984662 /* GalleryIndexController.swift */; };
@@ -49,6 +52,9 @@
 		D51B41461B1F0055003760DA /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		D51B41491B1F3C36003760DA /* CertificateShowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateShowController.swift; sourceTree = "<group>"; };
 		D51B414B1B1F453B003760DA /* GalleryContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryContentViewController.swift; sourceTree = "<group>"; };
+		D5202D9C1B26501300D24771 /* home_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = home_video.mp4; sourceTree = "<group>"; };
+		D5202D9E1B26550100D24771 /* home_video1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = home_video1.mp4; sourceTree = "<group>"; };
+		D5202DA01B26555700D24771 /* home_video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = home_video2.mp4; sourceTree = "<group>"; };
 		D55FA0731B1B4F0B00984662 /* ActivityShowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityShowController.swift; sourceTree = "<group>"; };
 		D55FA0751B1B526400984662 /* GalleryCreateController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCreateController.swift; sourceTree = "<group>"; };
 		D55FA0771B1B52AF00984662 /* GalleryIndexController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryIndexController.swift; sourceTree = "<group>"; };
@@ -126,9 +132,12 @@
 				D5BF26641B21A0A5005B7B36 /* Images.xcassets */,
 				D5E8EBDA1B1B364A00659ABE /* AppDelegate.swift */,
 				D5BABF231B1E139E00C5DC9D /* Main.storyboard */,
+				D5202DA01B26555700D24771 /* home_video2.mp4 */,
+				D5202D9E1B26550100D24771 /* home_video1.mp4 */,
 				D5BF26661B21B87B005B7B36 /* CustomWidgets.swift */,
 				D51B41421B1EEEDD003760DA /* MenuController.swift */,
 				D55FA0821B1CED0000984662 /* s3-Bridging-Header.h */,
+				D5202D9C1B26501300D24771 /* home_video.mp4 */,
 				D5E8EBDC1B1B364A00659ABE /* ActivitesViewController.swift */,
 				D55FA0731B1B4F0B00984662 /* ActivityShowController.swift */,
 				D55FA0791B1B6B3800984662 /* ContentViewController.swift */,
@@ -265,6 +274,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5202DA11B26555F00D24771 /* home_video2.mp4 in Resources */,
+				D5202D9F1B26550700D24771 /* home_video1.mp4 in Resources */,
+				D5202D9D1B26509D00D24771 /* home_video.mp4 in Resources */,
 				D5BF26651B21A0A5005B7B36 /* Images.xcassets in Resources */,
 				D5BABF241B1E139E00C5DC9D /* Main.storyboard in Resources */,
 				D5E8EBE51B1B364A00659ABE /* LaunchScreen.xib in Resources */,
