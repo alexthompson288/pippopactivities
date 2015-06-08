@@ -61,7 +61,6 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.navigationController?.navigationBar.hidden = false
     }
     
     @IBAction func RefreshData(sender: AnyObject) {
@@ -187,7 +186,7 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
         println("Specific data is \(specData)")
         vc.activityData = specData
         vc.name = ""
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
         

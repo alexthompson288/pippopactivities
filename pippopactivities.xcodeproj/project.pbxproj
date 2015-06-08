@@ -10,8 +10,6 @@
 		C966904870946013941E4C7E /* libPods-pippopactivities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5EDB99B5CEBD63314F2E55F /* libPods-pippopactivities.a */; };
 		D51B41431B1EEEDD003760DA /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B41421B1EEEDD003760DA /* MenuController.swift */; };
 		D51B41471B1F0055003760DA /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B41461B1F0055003760DA /* Utility.swift */; };
-		D51B414A1B1F3C36003760DA /* CertificateShowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B41491B1F3C36003760DA /* CertificateShowController.swift */; };
-		D51B414C1B1F453B003760DA /* GalleryContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B414B1B1F453B003760DA /* GalleryContentViewController.swift */; };
 		D5202D9D1B26509D00D24771 /* home_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D5202D9C1B26501300D24771 /* home_video.mp4 */; };
 		D5202D9F1B26550700D24771 /* home_video1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D5202D9E1B26550100D24771 /* home_video1.mp4 */; };
 		D5202DA11B26555F00D24771 /* home_video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D5202DA01B26555700D24771 /* home_video2.mp4 */; };
@@ -50,8 +48,6 @@
 		B90EA09617C7D6D574954F8B /* Pods-pippopactivities.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pippopactivities.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pippopactivities/Pods-pippopactivities.debug.xcconfig"; sourceTree = "<group>"; };
 		D51B41421B1EEEDD003760DA /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		D51B41461B1F0055003760DA /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
-		D51B41491B1F3C36003760DA /* CertificateShowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateShowController.swift; sourceTree = "<group>"; };
-		D51B414B1B1F453B003760DA /* GalleryContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryContentViewController.swift; sourceTree = "<group>"; };
 		D5202D9C1B26501300D24771 /* home_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = home_video.mp4; sourceTree = "<group>"; };
 		D5202D9E1B26550100D24771 /* home_video1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = home_video1.mp4; sourceTree = "<group>"; };
 		D5202DA01B26555700D24771 /* home_video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = home_video2.mp4; sourceTree = "<group>"; };
@@ -147,9 +143,7 @@
 				D51B41461B1F0055003760DA /* Utility.swift */,
 				D55FA07E1B1C742000984662 /* GalleryCell.swift */,
 				D55FA0751B1B526400984662 /* GalleryCreateController.swift */,
-				D51B41491B1F3C36003760DA /* CertificateShowController.swift */,
 				D55FA0771B1B52AF00984662 /* GalleryIndexController.swift */,
-				D51B414B1B1F453B003760DA /* GalleryContentViewController.swift */,
 				D5D8D8F41B258F1100A2FD9B /* GalleryImageShowController.swift */,
 				D55FA0801B1C769F00984662 /* ImageLoader.swift */,
 				D5E8EBE31B1B364A00659ABE /* LaunchScreen.xib */,
@@ -337,10 +331,8 @@
 				D55FA0811B1C769F00984662 /* ImageLoader.swift in Sources */,
 				D51B41431B1EEEDD003760DA /* MenuController.swift in Sources */,
 				D5E8EBFB1B1B38DA00659ABE /* ActivityCell.swift in Sources */,
-				D51B414A1B1F3C36003760DA /* CertificateShowController.swift in Sources */,
 				D55FA07F1B1C742000984662 /* GalleryCell.swift in Sources */,
 				D51B41471B1F0055003760DA /* Utility.swift in Sources */,
-				D51B414C1B1F453B003760DA /* GalleryContentViewController.swift in Sources */,
 				D55FA0781B1B52AF00984662 /* GalleryIndexController.swift in Sources */,
 				D5E8EBDB1B1B364A00659ABE /* AppDelegate.swift in Sources */,
 				D55FA07C1B1BB6BE00984662 /* LoginController.swift in Sources */,

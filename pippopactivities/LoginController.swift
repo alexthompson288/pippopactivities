@@ -80,7 +80,6 @@ class LoginController:UIViewController, UITextFieldDelegate {
     
 
     override func viewDidAppear(animated: Bool) {
-        self.navigationController?.navigationBar.hidden = true
         self.ErrorLabel.hidden = true
         self.BottomLoginRegisterToggleLabel.titleLabel?.text = "Register"
         self.ActivityIndicator.hidesWhenStopped = true

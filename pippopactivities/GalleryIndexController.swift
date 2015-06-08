@@ -36,7 +36,6 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.navigationController?.navigationBar.hidden = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -121,9 +120,7 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
         vc.dataDict = data[indexPath.row] as! NSDictionary
         println("Image name local is \(imageNameLocal)")
         vc.imageFile = imageNameLocal
-        self.navigationController?.pushViewController(vc, animated: true)
-
-    
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     func getUserImagesFromRails(learner:Int){

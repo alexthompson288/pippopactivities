@@ -79,7 +79,6 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
     
     override func viewDidAppear(animated: Bool) {
         println("View appeared function")
-        self.navigationController?.navigationBar.hidden = false
     }
     
     

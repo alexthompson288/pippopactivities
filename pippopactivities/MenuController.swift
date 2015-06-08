@@ -50,7 +50,6 @@ class MenuController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.navigationController?.navigationBar.hidden = true
 
     }
     
