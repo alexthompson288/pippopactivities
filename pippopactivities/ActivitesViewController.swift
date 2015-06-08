@@ -97,10 +97,14 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
                 if imgString != ""{
                     
                     var img = exp["url_image_remote"] as! String
-                    self.MyCollectionView.reloadData()
+                    
                     self.allImages.append(img)
                     var title = exp["title"] as! String
                     self.allTitles.append(title)
+                    dispatch_async(dispatch_get_main_queue()){
+                        self.MyCollectionView.reloadData()
+                    }
+                    
                 }
             }
             self.ActivitySpinner.stopAnimating()

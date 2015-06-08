@@ -20,7 +20,6 @@ class MenuController: UIViewController {
     @IBOutlet weak var LoggedInAsLabel: UILabel!
     
     
-    
     override func viewDidLoad() {
         println("View loaded")
         var filepath = Utility.createFilePathInDocsDir("userData.plist")
@@ -91,5 +90,65 @@ class MenuController: UIViewController {
             self.LoggedInAsLabel.text = "Logged in as \(thisName)"
         }
     }
+    
+        
+    func loadData() {
+        println("Starting the loadData function")
+        var filePath = Utility.createFilePathInDocsDir("data.plist")
+        var fileExists = Utility.checkIfFileExistsAtPath(filePath)
+        if fileExists {
+            println("Data File exists...")
+            var data = Utility.loadJSONDataAtFilePath(filePath)
+            println("JSON loaded from filepath")
+            let exps = data["digitalexperiences"] as! NSArray
+            println("Number of experiences is \(exps.count)")
+            let firstExperience: NSDictionary = exps[0] as! NSDictionary
+            println("First experience is \(firstExperience). About to run new fucntion")
+            var localImageFilename: NSString?
+            localImageFilename = firstExperience["url_image_local"] as? NSString
+            var remoteImageFilename: NSString?
+            remoteImageFilename = firstExperience["url_image_remote"] as? NSString
+            println("Remote image filename \(remoteImageFilename)")
+            if let ImgLocal = localImageFilename {
+                var imgPathAsString: String = ImgLocal as! String
+                var imgPathAsStringExtra = Utility.createFilePathInDocsDir(imgPathAsString)
+                println("Inside image local. \(imgPathAsStringExtra)")
+                var fileExists = Utility.checkIfFileExistsAtPath(imgPathAsStringExtra)
+                if fileExists == true {
+                    println("Local file exists at \(imgPathAsStringExtra)")
+                } else {
+                    println("Local file does not exist. Was named \(ImgLocal). About to get remote url and pull from network")
+                    if let ImgRemote: NSString = remoteImageFilename {
+                        println("Network location is \(ImgRemote)")
+                        let URL = NSURL(string: ImgRemote as String)
+                        println("Converted string to URL")
+                        let qos = Int(QOS_CLASS_USER_INITIATED.value)
+                        println("About to run async off main queue")
+                        dispatch_async(dispatch_get_global_queue(qos, 0)){() -> Void in
+                            let imageData = NSData(contentsOfURL: URL!)
+                            println("Got image data. About to write it")
+                            var localPath:NSString = Utility.documentsPathForFileName(ImgLocal as String)
+                            imageData!.writeToFile(localPath as String, atomically: true)
+                            println("Written image as data to \(localPath)")
+                            dispatch_async(dispatch_get_main_queue()){
+                                if Utility.checkIfFileExistsAtPath(localPath as String) == true {
+                                    println("File does exist")
+                                } else {
+                                    println("No luck with image local or remote")
+                                }
+                            }
+                        }
+                    } else {
+                        println("remote Image filename empty")
+                    }
+                    
+                }
+            }
+            else { println("Nothing inside ImgLocal") }
+        } else {
+            println("No data")
+        }
+    }
+
 
 }

@@ -11,19 +11,17 @@ import UIKit
 
 class GalleryCreateController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    @IBAction func Upload(sender: AnyObject) {
-        uploadToS3()
-    }
-    @IBOutlet weak var ShareButtonLabel: UIButton!
-    
+    @IBOutlet weak var GetPhotoLabel: MyCustomButton!
+    @IBOutlet weak var SaveButtonLabel: MyCustomButton!
+    @IBOutlet weak var ShareButtonLabel: MyCustomButton!
+    @IBOutlet weak var ChangeBackgroundLabel: MyCustomButton!
     @IBOutlet weak var TotalImage: UIImageView!
-    
     @IBOutlet weak var PhotoImage: UIImageView!
-    
     @IBOutlet weak var BackgroundCertificate: UIImageView!
     
-    var activityViewController = UIActivityViewController()
+    @IBOutlet weak var StartAgainLabel: MyCustomButton!
     
+    var activityViewController = UIActivityViewController()
     var learnerID = Int()
     var backgroundImageArray = ["ugc_image_1", "ugc_image_2", "ugc_image_3", "ugc_image_4", "ugc_image_5", "ugc_image_6", "ugc_image_7", "ugc_image_8", "ugc_image_9"]
     
@@ -32,11 +30,49 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
     var amountUploaded:Int64 = 0
     var randomImage = 0
     
+    enum StatusOptions: String {
+        case A = "noPhotoTaken"
+        case B = "photoTaken"
+        case C = "photoSaved"
+    }
+
+    
+    var status = "noPhotoTaken" { didSet { toggleButtons() } }
+    
+    func toggleButtons(){
+        if status == "noPhotoTaken" {
+            println("No photo taken. Show appropriate buttons")
+            self.TotalImage.image = nil
+            self.PhotoImage.image = nil
+            self.GetPhotoLabel.hidden = false
+            GetPhotoLabel.enabled = true
+            self.ChangeBackgroundLabel.hidden = false
+            self.ShareButtonLabel.hidden = true
+            self.SaveButtonLabel.hidden = true
+            self.StartAgainLabel.hidden = true
+        } else if status == "photoTaken" {
+            println("Photo taken. Show appropriate buttons")
+            self.SaveButtonLabel.hidden = false
+            self.GetPhotoLabel.titleLabel!.text = "Retake photo"
+
+        } else if status == "photoSaved" {
+            println("Photo saved. Show appropriate buttons")
+            self.StartAgainLabel.hidden = false
+            self.GetPhotoLabel.titleLabel!.text = "Take photo"
+            self.GetPhotoLabel.hidden = true
+            GetPhotoLabel.enabled = false
+            self.ShareButtonLabel.hidden = false
+            self.ChangeBackgroundLabel.hidden = true
+        } else { println("No status here") }
+    }
     
     override func viewDidLoad() {
+        self.status = "noPhotoTaken"
+        println("status is \(self.status)")
           self.randomImage = Int(arc4random_uniform(9))
 //        println("Gallery create view loaded...")
 //        println("...")
+        
           self.BackgroundCertificate.image = UIImage(named: backgroundImageArray[self.randomImage])
           learnerID = NSUserDefaults.standardUserDefaults().objectForKey("learnerID") as! Int
     }
@@ -47,6 +83,12 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
     }
     
     
+    @IBAction func StartAgainButton(sender: AnyObject) {
+        println("Starting again button pushed")
+        self.TotalImage.image = nil
+        self.PhotoImage.image = nil
+        self.status = "noPhotoTaken"
+    }
     
     @IBAction func ToggleBackgroundImage(sender: AnyObject) {
         var newRandomImage = Int(arc4random_uniform(9))
@@ -56,11 +98,17 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
     
     
     @IBAction func GetPhotoButton(sender: AnyObject) {
+        println("Get photo button pushed...")
         var imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         imagePicker.allowsEditing = true
         presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func Upload(sender: AnyObject) {
+        self.mergeImages()
+        uploadToS3()
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,7 +118,8 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
         self.PhotoImage.image = image
         dismissViewControllerAnimated(true, completion: nil)
-        self.mergeImages()
+        self.status = "photoTaken"
+        
     }
     
     
@@ -89,8 +138,6 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
         println("Blended together the images...")
         PhotoImage.image = nil
     }
-    
-    
     
     func share(){
         UIGraphicsBeginImageContext(BackgroundCertificate.bounds.size)
@@ -155,6 +202,7 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
                 var imageUrlRemote = ("\(Constants.s3BaseUrl)/\(Constants.BucketName)/\(s3urlname)")
                 println("Image saved to \(imageUrlRemote). And learner ID is \(String(self.learnerID)). And s3url is \(imageUrlRemote)")
                 Utility.createRecordOnRails(self.learnerID, digitalexperience: 5, image: imageUrlRemote, imageLocal: s3urlname)
+                self.status = "photoSaved"
             }
 //            self.removeLoadingView()
             return "all done";

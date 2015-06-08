@@ -22,6 +22,7 @@
 		D5BABF241B1E139E00C5DC9D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5BABF231B1E139E00C5DC9D /* Main.storyboard */; };
 		D5BF26651B21A0A5005B7B36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5BF26641B21A0A5005B7B36 /* Images.xcassets */; };
 		D5BF26671B21B87B005B7B36 /* CustomWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BF26661B21B87B005B7B36 /* CustomWidgets.swift */; };
+		D5D8D8F51B258F1100A2FD9B /* GalleryImageShowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D8D8F41B258F1100A2FD9B /* GalleryImageShowController.swift */; };
 		D5E181FE1B1D967300FBEAEA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E181FD1B1D967300FBEAEA /* Constants.swift */; };
 		D5E8EBDB1B1B364A00659ABE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8EBDA1B1B364A00659ABE /* AppDelegate.swift */; };
 		D5E8EBDD1B1B364A00659ABE /* ActivitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8EBDC1B1B364A00659ABE /* ActivitesViewController.swift */; };
@@ -59,6 +60,7 @@
 		D5BABF231B1E139E00C5DC9D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D5BF26641B21A0A5005B7B36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D5BF26661B21B87B005B7B36 /* CustomWidgets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomWidgets.swift; sourceTree = "<group>"; };
+		D5D8D8F41B258F1100A2FD9B /* GalleryImageShowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryImageShowController.swift; sourceTree = "<group>"; };
 		D5E181FD1B1D967300FBEAEA /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D5E8EBD51B1B364A00659ABE /* pippopactivities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pippopactivities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E8EBD91B1B364A00659ABE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -132,13 +134,14 @@
 				D55FA0791B1B6B3800984662 /* ContentViewController.swift */,
 				D5E8EBFA1B1B38DA00659ABE /* ActivityCell.swift */,
 				D55FA07B1B1BB6BE00984662 /* LoginController.swift */,
-				D55FA07E1B1C742000984662 /* GalleryCell.swift */,
 				D5E181FD1B1D967300FBEAEA /* Constants.swift */,
 				D51B41461B1F0055003760DA /* Utility.swift */,
+				D55FA07E1B1C742000984662 /* GalleryCell.swift */,
 				D55FA0751B1B526400984662 /* GalleryCreateController.swift */,
 				D51B41491B1F3C36003760DA /* CertificateShowController.swift */,
 				D55FA0771B1B52AF00984662 /* GalleryIndexController.swift */,
 				D51B414B1B1F453B003760DA /* GalleryContentViewController.swift */,
+				D5D8D8F41B258F1100A2FD9B /* GalleryImageShowController.swift */,
 				D55FA0801B1C769F00984662 /* ImageLoader.swift */,
 				D5E8EBE31B1B364A00659ABE /* LaunchScreen.xib */,
 				D5E8EBD81B1B364A00659ABE /* Supporting Files */,
@@ -329,6 +332,7 @@
 				D55FA0781B1B52AF00984662 /* GalleryIndexController.swift in Sources */,
 				D5E8EBDB1B1B364A00659ABE /* AppDelegate.swift in Sources */,
 				D55FA07C1B1BB6BE00984662 /* LoginController.swift in Sources */,
+				D5D8D8F51B258F1100A2FD9B /* GalleryImageShowController.swift in Sources */,
 				D55FA0741B1B4F0B00984662 /* ActivityShowController.swift in Sources */,
 				D55FA07A1B1B6B3800984662 /* ContentViewController.swift in Sources */,
 			);

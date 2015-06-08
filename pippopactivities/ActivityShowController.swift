@@ -59,6 +59,7 @@ class ActivityShowController: UIViewController, UIPageViewControllerDataSource {
         var videoPresent = self.activityData[index]["video_present"] as! Bool
         var audioPresent = self.activityData[index]["audio_present"] as! Bool
         var certificatePresent = self.activityData[index]["certificate_present"] as! Bool
+        var photographPresent = self.activityData[index]["photograph_present"] as! Bool
         
         vc.imageFile = self.activityData[index]["url_image_remote"] as! String
         vc.titleText = self.activityData[index]["title"] as! String
@@ -80,6 +81,8 @@ class ActivityShowController: UIViewController, UIPageViewControllerDataSource {
             vc.mediaFile = audioFile
         } else if certificatePresent == true {
             vc.mediaType = "certificate"
+        } else if photographPresent == true {
+            vc.mediaType = "photograph"
         } else {
             vc.mediaType = "unknown"
         }

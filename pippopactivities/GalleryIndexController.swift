@@ -74,13 +74,6 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
             let url = NSURL(string: filePathLocal)
             println("Total url is \(url)")
             cell.GalleryImage.image = UIImage(named: filePathLocal)
-//            let data = NSData(contentsOfURL: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check
-//            
-//            if let imgData = data {
-//                println("Found image at \(url) and should display")
-//                
-//            }
-            
         }
         else {
             println("Not locally saved. Going to \(imagePathRemote) to fetch image")
@@ -97,23 +90,37 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         println("Item \(data[indexPath.row]) Clicked")
-        var vc: CertificateShowController = self.storyboard?.instantiateViewControllerWithIdentifier("CertificateShowID") as! CertificateShowController
-        println("data we are setting is \(data)")
-        vc.activityData = self.localImageArray as NSArray
-        println("Below is vc activity data")
-        println(vc.activityData)
+//        var vc: CertificateShowController = self.storyboard?.instantiateViewControllerWithIdentifier("CertificateShowID") as! CertificateShowController
+//        println("data we are setting is \(data)")
+//        vc.activityData = self.localImageArray as NSArray
+//        println("Below is vc activity data")
+//        println(vc.activityData)
+//        vc.indexNumber = indexPath.row
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+        
+//        TESTING OUT SHOWING EACH IMAGE MODALLY
+        var vc: GalleryImageShowController = self.storyboard?.instantiateViewControllerWithIdentifier("GalleryImageShowID") as! GalleryImageShowController
+        var imageNameLocal = data[indexPath.row]["url_image_local"] as! String
+        vc.dataDict = data[indexPath.row] as! NSDictionary
+        println("Image name local is \(imageNameLocal)")
+        vc.imageFile = imageNameLocal
         self.navigationController?.pushViewController(vc, animated: true)
+
+    
     }
     
     func getUserImagesFromRails(learner:Int){
+        println("Learner ID is \(learner)")
         var myData = [""]
         var success = false
         let url = NSURL(string: Constants.LearnerImagesUrl)!
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\n    \"learner_id\": \"\(learner)\"\n}".dataUsingEncoding(NSUTF8StringEncoding);
+        request.HTTPBody = "{\n    \"id\": \"\(learner)\"\n}".dataUsingEncoding(NSUTF8StringEncoding);
         let session = NSURLSession.sharedSession()
+        println("About to go out to network with UserimagesFromRails")
         let task = session.dataTaskWithRequest(request) { (data: NSData!, response: NSURLResponse!, error: NSError!) in
             
             if error != nil {
@@ -133,6 +140,11 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
                     if let imgsPresent = imgs{
                         println("There are \(imgsPresent.count) images")
                         self.data = imgsPresent
+                        println("Calling reload data on Collection...")
+                        println("this is what data looks like. Local image array \(self.localImageArray). Data array: \(self.data)")
+                        dispatch_async(dispatch_get_main_queue()){
+                            self.MyGalleryCollection.reloadData()
+                        }
                     }
                     success = true
                 }

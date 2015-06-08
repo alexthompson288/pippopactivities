@@ -11,6 +11,7 @@ class CertificateShowController: UIViewController, UIPageViewControllerDataSourc
     
     var pageViewController: UIPageViewController!
     
+    var indexNumber: Int!
     
     var activityData: NSArray!
     

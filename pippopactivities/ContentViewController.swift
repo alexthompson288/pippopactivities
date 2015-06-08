@@ -14,8 +14,6 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
 
     @IBOutlet weak var ContentImage: UIImageView!
     
-    @IBOutlet weak var ContentTitle: UILabel!
-    
     @IBOutlet weak var PlayIcon: UIButton!
     
     @IBOutlet weak var StoryTextLabel: UILabel!
@@ -49,14 +47,25 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
     
     var moviePlayer = MPMoviePlayerController()
     
+    var isPlaying = Bool()
+    
     @IBAction func PlayMedia(sender: AnyObject) {
         var media_URL: NSURL = NSURL(string: mediaFile)!
         self.moviePlayer = MPMoviePlayerController(contentURL: media_URL)
         self.moviePlayer.view.frame = CGRect(x: 20, y: 100, width: 0, height: 0)
-        self.view.addSubview(self.moviePlayer.view)
-        self.moviePlayer.controlStyle = MPMovieControlStyle.Fullscreen
-        self.moviePlayer.fullscreen = true
-        self.moviePlayer.play()
+        if self.mediaType == "video" {
+            self.view.addSubview(self.moviePlayer.view)
+            self.moviePlayer.controlStyle = MPMovieControlStyle.Fullscreen
+            self.moviePlayer.fullscreen = true
+
+        }
+        if isPlaying == false {
+            self.moviePlayer.play()
+            isPlaying = true
+        } else {
+            self.moviePlayer.stop()
+            isPlaying = false
+        }
     }
     
     func toggleCertificateItems(status: Bool){
@@ -73,6 +82,7 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.isPlaying = false
         toggleCertificateItems(true)
         learnerID = NSUserDefaults.standardUserDefaults().objectForKey("learnerID") as! Int
         ImageLoader.sharedLoader.imageForUrl(self.imageFile, completionHandler:{(image: UIImage?, url: String) in
@@ -88,13 +98,14 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
         } else if mediaType == "certificate" {
             toggleCertificateItems(false)
             println("CERTIFICATE PAGE")
+        } else if mediaType == "photograph" {
+            toggleCertificateItems(false)
+            println("PHOTOGRAPH PAGE")
         }
         
         if mediaFile == ""{
             self.PlayIcon.alpha = 0.0
         }
-        self.ContentTitle.text = self.titleText
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -120,7 +131,13 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-        self.LearnerImage.image = image
+        if self.mediaType == "photograph"{
+            println("CERTIFICATE PAGE. IMAGE PICKER")
+            self.ContentImage.image = image
+        } else {
+            self.LearnerImage.image = image
+        }
+        
         dismissViewControllerAnimated(true, completion: nil)
         self.mergeImages()
     }
