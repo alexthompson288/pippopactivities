@@ -29,9 +29,9 @@ class MyCustomButton: UIButton {
         var redColor = UIColor(red: 242, green: 108, blue: 79)
         var yellowColor = UIColor(red: 255, green: 217, blue: 84)
         super.init(coder: aDecoder)
-        self.layer.cornerRadius = 5.0;
+        self.layer.cornerRadius = 10.0;
         self.layer.borderColor = UIColor.redColor().CGColor
-        self.layer.borderWidth = 1.5
+        self.layer.borderWidth = 3
         self.backgroundColor = redColor
         self.tintColor = UIColor.whiteColor()
     }
