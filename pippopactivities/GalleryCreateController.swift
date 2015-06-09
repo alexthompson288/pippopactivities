@@ -21,6 +21,11 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
     
     @IBOutlet weak var StartAgainLabel: MyCustomButton!
     
+    @IBOutlet weak var NoPhotoView: UIView!
+    
+    @IBOutlet weak var ShareView: UIView!
+    @IBOutlet weak var ClearScreenLabel: UIButton!
+    
     var activityViewController = UIActivityViewController()
     var learnerID = Int()
     var backgroundImageArray = ["ugc_image_1", "ugc_image_2", "ugc_image_3", "ugc_image_4", "ugc_image_5", "ugc_image_6", "ugc_image_7", "ugc_image_8", "ugc_image_9"]
@@ -30,44 +35,38 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
     var amountUploaded:Int64 = 0
     var randomImage = 0
     
-    enum StatusOptions: String {
-        case A = "noPhotoTaken"
-        case B = "photoTaken"
-        case C = "photoSaved"
-    }
-
-    
     var status = "noPhotoTaken" { didSet { toggleButtons() } }
     
     func toggleButtons(){
         if status == "noPhotoTaken" {
             println("No photo taken. Show appropriate buttons")
+            self.ShareView.hidden = true
+            self.NoPhotoView.hidden = false
+            self.ClearScreenLabel.hidden = true
             self.TotalImage.image = nil
             self.PhotoImage.image = nil
             self.GetPhotoLabel.hidden = false
             GetPhotoLabel.enabled = true
             self.ChangeBackgroundLabel.hidden = false
-            self.ShareButtonLabel.hidden = true
             self.SaveButtonLabel.hidden = true
-            self.StartAgainLabel.hidden = true
         } else if status == "photoTaken" {
             println("Photo taken. Show appropriate buttons")
             self.SaveButtonLabel.hidden = false
-            self.GetPhotoLabel.titleLabel!.text = "Retake photo"
-
+            self.ClearScreenLabel.hidden = false
         } else if status == "photoSaved" {
             println("Photo saved. Show appropriate buttons")
+            self.ShareView.hidden = false
+            self.NoPhotoView.hidden = true
             self.StartAgainLabel.hidden = false
-            self.GetPhotoLabel.titleLabel!.text = "Take photo"
-            self.GetPhotoLabel.hidden = true
-            GetPhotoLabel.enabled = false
             self.ShareButtonLabel.hidden = false
-            self.ChangeBackgroundLabel.hidden = true
         } else { println("No status here") }
     }
     
     override func viewDidLoad() {
         self.status = "noPhotoTaken"
+        var blueColor = UIColor(red: 107, green: 231, blue: 255)
+        self.NoPhotoView.backgroundColor = blueColor
+        self.ShareView.hidden = true
         println("status is \(self.status)")
           self.randomImage = Int(arc4random_uniform(9))
 //        println("Gallery create view loaded...")
@@ -81,6 +80,11 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
         println("View appeared function")
     }
     
+    @IBAction func ClearScreen(sender: AnyObject) {
+        println("Clearn scree button pushed")
+        self.PhotoImage.image = nil
+        self.status = "noPhotoTaken"
+    }
     
     @IBAction func StartAgainButton(sender: AnyObject) {
         println("Starting again button pushed")

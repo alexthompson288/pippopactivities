@@ -35,6 +35,10 @@ class LoginController:UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var BottomLoginRegisterToggleLabel: UIButton!
     
+    @IBOutlet weak var LoginFieldsView: UIView!
+    
+    @IBOutlet weak var RegisterFieldsView: UIView!
+    
     var visible:CGFloat = 1.0
     var invisible:CGFloat = 0.0
     
@@ -57,14 +61,20 @@ class LoginController:UIViewController, UITextFieldDelegate {
     var savedEmail:String?
     
     override func viewDidLoad() {
-        
-        var urlpath = NSBundle.mainBundle().URLForResource("home_video2", withExtension: "mp4")
+        self.LoginFieldsView.layer.borderWidth = 3.0
+        self.LoginFieldsView.layer.borderColor = UIColor.redColor().CGColor
+        self.LoginFieldsView.layer.cornerRadius = 5.0
+        self.RegisterFieldsView.layer.borderWidth = 3.0
+        self.RegisterFieldsView.layer.borderColor = UIColor.redColor().CGColor
+        self.RegisterFieldsView.layer.cornerRadius = 5.0
+        self.RegisterFieldsView.hidden = true
+        var urlpath = NSBundle.mainBundle().URLForResource("ipad_homevideo", withExtension: "mp4")
         println("url path is \(urlpath)")
         self.moviePlayer = MPMoviePlayerController(contentURL: urlpath!)
         self.moviePlayer.shouldAutoplay = true
         self.moviePlayer.setFullscreen(false, animated: true)
         self.moviePlayer.controlStyle = MPMovieControlStyle.None
-        self.moviePlayer.scalingMode = MPMovieScalingMode.AspectFit
+        self.moviePlayer.scalingMode = MPMovieScalingMode.AspectFill
         self.moviePlayer.repeatMode = MPMovieRepeatMode.One
         self.moviePlayer.view.frame = self.view.bounds
         self.view.addSubview(self.moviePlayer.view)
@@ -87,7 +97,8 @@ class LoginController:UIViewController, UITextFieldDelegate {
         if let mySavedEmail = savedEmail {
             if savedEmail != ""{
                 println("About to perform segue")
-                performSegueWithIdentifier("LoginToActivitiesSegue", sender: self)
+                var vc: UINavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("MenuNavigationID") as! UINavigationController
+                self.presentViewController(vc, animated: true, completion: nil)
                 println("Finding saved email from NSUserDefaults \(mySavedEmail)")
             }
         }
@@ -133,10 +144,15 @@ class LoginController:UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func ForgottenPasswordButton(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: "https://www.pippoplearning.com/accounts/password/new")!)
+    }
+    
     @IBAction func LoginButton(sender: AnyObject) {
         println("What is in register field \(self.RegisterChildField)")
     
         if self.loginScreen == true {
+            println("About do first login function")
             FirstLoginUserFunction()
         } else {
             RegisterUser()
@@ -200,7 +216,8 @@ class LoginController:UIViewController, UITextFieldDelegate {
                 }
                 self.ActivityIndicator.stopAnimating()
                 
-                self.performSegueWithIdentifier("LoginToActivitiesSegue", sender: self)
+                var vc: UINavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("MenuNavigationID") as! UINavigationController
+                self.presentViewController(vc, animated: true, completion: nil)
 
             }
             else{
@@ -313,13 +330,16 @@ class LoginController:UIViewController, UITextFieldDelegate {
                     NSUserDefaults.standardUserDefaults().setObject(password, forKey: "password")
                     NSUserDefaults.standardUserDefaults().setObject(access, forKey: "access_token")
                     self.token = NSUserDefaults.standardUserDefaults().objectForKey("access_token") as! String
+                    println("User email is \(email) and password is \(password)")
                     Utility.saveJSONWithArchiver(jsonDict, savedName: "userData.plist")
                     println("JSON saved locally.")
                     if self.token != ""{
                         self.ErrorLabel.text = "Logged in"
                     }
                     self.ActivityIndicator.stopAnimating()
-                    self.performSegueWithIdentifier("LoginToActivitiesSegue", sender: self)
+                    println("About to present menu VC...")
+                    var vc: UINavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("MenuNavigationID") as! UINavigationController
+                    self.presentViewController(vc, animated: true, completion: nil)
                 }
             }
             else{

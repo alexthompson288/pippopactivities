@@ -28,6 +28,7 @@ class MyCustomButton: UIButton {
     required init(coder aDecoder: NSCoder) {
         var redColor = UIColor(red: 242, green: 108, blue: 79)
         var yellowColor = UIColor(red: 255, green: 217, blue: 84)
+        var blueColor = UIColor(red: 107, green: 231, blue: 255)
         super.init(coder: aDecoder)
         self.layer.cornerRadius = 10.0;
         self.layer.borderColor = UIColor.redColor().CGColor
@@ -37,3 +38,16 @@ class MyCustomButton: UIButton {
     }
 }
 
+class RoundedCornerView: UIView {
+    required init(coder aDecoder: NSCoder) {
+        var redColor = UIColor(red: 242, green: 108, blue: 79)
+        var yellowColor = UIColor(red: 255, green: 217, blue: 84)
+        var blueColor = UIColor(red: 107, green: 231, blue: 255)
+        super.init(coder: aDecoder)
+        self.layer.cornerRadius = 10.0;
+        self.layer.borderColor = redColor.CGColor
+        self.layer.borderWidth = 3
+        self.backgroundColor = blueColor
+        self.tintColor = UIColor.whiteColor()
+    }
+}

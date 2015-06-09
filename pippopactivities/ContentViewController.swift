@@ -28,6 +28,14 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
     
     @IBOutlet weak var SeeGalleryLabel: UIButton!
     
+    @IBOutlet weak var SavePhotoView: RoundedCornerView!
+    
+    @IBOutlet weak var SharePhotoView: RoundedCornerView!
+    
+    @IBOutlet weak var TakePhotoView: RoundedCornerView!
+    
+    
+    
     var pageIndex: Int!
     var titleText: String!
     var imageFile: String!
@@ -41,6 +49,8 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
     var uploadRequest:AWSS3TransferManagerUploadRequest?
     var filesize:Int64 = 0
     var amountUploaded:Int64 = 0
+    
+    var userstatus = "0"
 
     
     var moviePlayer = MPMoviePlayerController()
@@ -89,10 +99,13 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
         
         if mediaType == "video"{
             println("VIDEO PAGE")
+            toggleCertificateItems(true)
         } else if mediaType == "audio" {
             println("AUDIO PAGE")
+            toggleCertificateItems(true)
         } else if mediaType == "certificate" {
             toggleCertificateItems(false)
+            self.userstatus = "1"
             println("CERTIFICATE PAGE")
         } else if mediaType == "photograph" {
             toggleCertificateItems(false)

@@ -24,20 +24,26 @@ class GalleryImageShowController: UIViewController {
     @IBOutlet weak var PublicView: UISwitch! { didSet {
         } }
     
+    @IBOutlet weak var StarButtonLabel: UIButton!
+    
     var dataDict:NSDictionary!
     var imageFile = ""
     var imageData: NSDictionary!
     var learnerID: Int!
     var imageRecordID: Int!
     var imagePublicViewStatus: Bool!
-    var votestatus: Bool!
+    var votecount: Int!
+    var votestatus: Bool! { didSet { checkVoteStatus() }}
     
+    @IBOutlet weak var PublicViewStatusLabel: UILabel!
+    @IBOutlet weak var VoteCountLabel: UILabel!
     
     override func viewDidLoad() {
         println("Gallery show VC Loaded")
         println("Image file is \(self.imageFile))")
         println("Data dict is \(dataDict)")
         self.learnerID = NSUserDefaults.standardUserDefaults().objectForKey("learnerID") as! Int
+        self.votecount = self.dataDict["votecount"] as! Int
         self.votestatus = self.dataDict["votestatus"] as! Bool
         self.imageRecordID = self.dataDict["id"] as! Int
         self.imagePublicViewStatus = self.dataDict["publicview"] as! Bool
@@ -50,10 +56,31 @@ class GalleryImageShowController: UIViewController {
         else {
             println("Not locally saved.")
         }
+        println("About to set votecount label \(self.votecount)")
+        self.VoteCountLabel.text = "\(self.votecount)"
     }
     
     @IBAction func StarAction(sender: AnyObject) {
+        if self.votestatus == true {
+            self.VoteCountLabel.text = "\(self.votecount - 1)"
+            self.StarButtonLabel.setImage(UIImage(named: "star_a_150"), forState: .Normal)
+
+        } else {
+            self.VoteCountLabel.text = "\(self.votecount + 1)"
+            self.StarButtonLabel.setImage(UIImage(named: "star_a_150"), forState: .Normal)
+
+        }
         submitStar(self.learnerID, learnerimageId: self.imageRecordID)
+    }
+    
+    func checkVoteStatus(){
+        if self.votestatus == true {
+            println("Check vote status: \(self.votestatus)")
+            self.StarButtonLabel.setImage(UIImage(named: "star_a_150"), forState: .Normal)
+        } else if self.votestatus == false {
+            println("Check vote status: \(self.votestatus). In false bit.")
+            self.StarButtonLabel.setImage(UIImage(named: "star_b_150"), forState: .Normal)
+        }
     }
     
     func submitStar(learnerId: Int, learnerimageId: Int){
@@ -81,7 +108,13 @@ class GalleryImageShowController: UIViewController {
                 if let thisError = errors {
                     println("Errors are \(errors)")
                 } else {
-                    
+                    if self.votestatus == true {
+                        println("About to change vote status to false")
+                        self.votestatus = false
+                    } else if self.votestatus == false {
+                        println("About to change vote status to true")
+                        self.votestatus = true
+                    }
                     println("Successfully did something with star.")
                     println("Json response from deletion is \(jsonDict)")
                 }
@@ -101,7 +134,7 @@ class GalleryImageShowController: UIViewController {
     func togglePublicView(){
         if self.PublicView.on == true {
             println("Turned it on")
-            
+            self.PublicViewStatusLabel.text = "Public"
             self.imagePublicViewStatus = true
             println("Learner id is \(self.learnerID). ID is \(self.imageRecordID). Status is \(self.imagePublicViewStatus)")
             toggleImageViewStatusOnRails(self.learnerID, imageRecordId: self.imageRecordID, publicView: self.imagePublicViewStatus)
@@ -110,6 +143,8 @@ class GalleryImageShowController: UIViewController {
             
             println("Turned it off")
             self.imagePublicViewStatus = false
+            self.PublicViewStatusLabel.text = "Private"
+
             println("Learner id is \(self.learnerID). ID is \(self.imageRecordID). Status is \(self.imagePublicViewStatus)")
             toggleImageViewStatusOnRails(self.learnerID, imageRecordId: self.imageRecordID, publicView: self.imagePublicViewStatus)
         }
@@ -135,6 +170,7 @@ class GalleryImageShowController: UIViewController {
     @IBAction func DeleteButton(sender: AnyObject) {
         println("About to delete")
         deleteImageRecordOnRails(self.learnerID, imageRecordId: self.imageRecordID)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func toggleImageViewStatusOnRails(learner: Int, imageRecordId: Int, publicView: Bool){

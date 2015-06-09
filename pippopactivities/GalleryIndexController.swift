@@ -35,7 +35,13 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
         self.MyGalleryCollection.dataSource = self
     }
     
+    override func viewWillAppear(animated: Bool) {
+        println("View will appear has run!")
+    }
+    
     override func viewDidAppear(animated: Bool) {
+        println("View did appear has run!")
+       getUserImages()
     }
     
     override func didReceiveMemoryWarning() {
