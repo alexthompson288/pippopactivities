@@ -723,7 +723,7 @@
                                     <constraint firstAttribute="width" constant="157" id="1f4-gC-Wn4"/>
                                     <constraint firstAttribute="height" constant="137" id="7Kg-fZ-rFD"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="157" id="IMD-uk-28v"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="137" id="KYB-by-6vJ"/>
+                                    <constraint firstAttribute="height" constant="137" id="KYB-by-6vJ"/>
                                     <constraint firstAttribute="width" constant="248" id="WZD-eg-GJf"/>
                                     <constraint firstAttribute="height" constant="398" id="bN0-E7-KFy"/>
                                     <constraint firstAttribute="height" constant="231" id="xSj-5y-Q2q"/>
@@ -912,7 +912,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="5kG-TK-7Ad"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="LoggedInAsLabel" destination="Ee1-xx-jiW" id="7OG-Ia-N79"/>
                         <segue destination="iUh-WI-I0F" kind="show" identifier="MenuToLoginSegue" id="kyy-NN-szh"/>
