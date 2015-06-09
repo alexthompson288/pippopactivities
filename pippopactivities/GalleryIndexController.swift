@@ -58,7 +58,6 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
             self.data = []
             self.data = self.publicData
             println("The public data is now \(self.data)")
-
         }
     }
     
@@ -161,11 +160,13 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
                     if let imgsPresent = imgs{
                         println("There are \(imgsPresent.count) images")
                         self.learnerData = imgsPresent
-                        self.data = self.learnerData
-                        println("Calling reload data on Collection...")
-                        println("This is what data looks like. Local image array \(self.localImageArray). Data array: \(self.data)")
-                        dispatch_async(dispatch_get_main_queue()){
-                            self.MyGalleryCollection.reloadData()
+                        if self.SegmentImagesLabel.selectedSegmentIndex == 0 {
+                            self.data = self.learnerData
+                            println("Calling reload data on Collection...")
+                            println("This is what data looks like. Local image array \(self.localImageArray). Data array: \(self.data)")
+                            dispatch_async(dispatch_get_main_queue()){
+                                self.MyGalleryCollection.reloadData()
+                            }
                         }
                     }
                     var publicimgs:NSArray?
@@ -175,8 +176,11 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
                         self.publicData = publicimgsPresent
                         println("Calling reload data on Collection...")
                         println("Public Data array: \(self.publicData)")
-                        dispatch_async(dispatch_get_main_queue()){
-                            self.MyGalleryCollection.reloadData()
+                        if self.SegmentImagesLabel.selectedSegmentIndex == 1 {
+                            self.data = self.publicData
+                            dispatch_async(dispatch_get_main_queue()){
+                                self.MyGalleryCollection.reloadData()
+                            }
                         }
                     }
 
