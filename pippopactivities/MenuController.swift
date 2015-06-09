@@ -49,10 +49,6 @@ class MenuController: UIViewController {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-
-    }
-    
     @IBAction func ChangeLearner(sender: AnyObject) {
         let optionMenu = UIAlertController(title: nil, message: "Choose Learner", preferredStyle: .ActionSheet)
         optionMenu.popoverPresentationController?.sourceView = sender as! UIView
@@ -80,7 +76,9 @@ class MenuController: UIViewController {
         NSUserDefaults.standardUserDefaults().removeObjectForKey("access_token")
         NSUserDefaults.standardUserDefaults().removeObjectForKey("learnerID")
         NSUserDefaults.standardUserDefaults().removeObjectForKey("learnerName")
-        performSegueWithIdentifier("MenuToLoginSegue", sender: self)
+        var vc: LoginController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginControllerID") as! LoginController
+        presentViewController(vc, animated: true, completion: nil)
+        
     }
     
     func updateUI(){

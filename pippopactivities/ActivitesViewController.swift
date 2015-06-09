@@ -186,7 +186,7 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
         println("Specific data is \(specData)")
         vc.activityData = specData
         vc.name = ""
-        self.presentViewController(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
         

@@ -120,7 +120,7 @@ class GalleryIndexController: UIViewController, UINavigationControllerDelegate, 
         vc.dataDict = data[indexPath.row] as! NSDictionary
         println("Image name local is \(imageNameLocal)")
         vc.imageFile = imageNameLocal
-        self.presentViewController(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func getUserImagesFromRails(learner:Int){
