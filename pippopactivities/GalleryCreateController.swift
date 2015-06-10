@@ -56,6 +56,7 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
         } else if status == "photoSaved" {
             println("Photo saved. Show appropriate buttons")
             self.ShareView.hidden = false
+            self.ShareView.layer.zPosition = 10
             self.NoPhotoView.hidden = true
             self.StartAgainLabel.hidden = false
             self.ShareButtonLabel.hidden = false
@@ -83,13 +84,14 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
     @IBAction func ClearScreen(sender: AnyObject) {
         println("Clearn scree button pushed")
         self.PhotoImage.image = nil
+        self.TotalImage.image = nil
         self.status = "noPhotoTaken"
     }
     
     @IBAction func StartAgainButton(sender: AnyObject) {
         println("Starting again button pushed")
         self.TotalImage.image = nil
-        self.PhotoImage.image = nil
+        
         self.status = "noPhotoTaken"
     }
     
@@ -135,7 +137,7 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
         UIGraphicsBeginImageContext(BackgroundCertificate.frame.size)
         BackgroundCertificate.image?.drawInRect(CGRect(x: 0, y: 0, width: BackgroundCertificate.frame.size.width, height: BackgroundCertificate.frame.size.height), blendMode: kCGBlendModeNormal, alpha: 1.0)
         PhotoImage.image?.drawInRect(CGRect(x: 550, y: 100, width: PhotoImage.frame.size.width, height: PhotoImage.frame.size.height), blendMode: kCGBlendModeNormal, alpha: 1.0)
-        BackgroundCertificate.image = UIGraphicsGetImageFromCurrentImageContext()
+//        BackgroundCertificate.image = UIGraphicsGetImageFromCurrentImageContext()
         self.TotalImage.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         println("Blended together the images...")
@@ -144,13 +146,14 @@ class GalleryCreateController: UIViewController, UINavigationControllerDelegate,
     
     func share(){
         UIGraphicsBeginImageContext(BackgroundCertificate.bounds.size)
-        BackgroundCertificate.image?.drawInRect(CGRect(x: 0, y: 0,
-        width: BackgroundCertificate.frame.size.width, height: BackgroundCertificate.frame.size.height))
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        let image1 = self.TotalImage.image
+//        BackgroundCertificate.image?.drawInRect(CGRect(x: 0, y: 0,
+//        width: BackgroundCertificate.frame.size.width, height: BackgroundCertificate.frame.size.height))
+//        let image = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        let image1 = self.TotalImage.image
         
-        var avc:UIActivityViewController = Utility.socialShare(sharingText: "Come join us learning with Pip", sharingImage: image1, sharingURL: NSURL(string: "http://www.pippoplearning.com/"))
+        
+        var avc:UIActivityViewController = Utility.socialShare(sharingText: "Come join us learning with Pip", sharingImage: TotalImage.image, sharingURL: NSURL(string: "http://www.pippoplearning.com/"))
         avc.popoverPresentationController!.sourceView = self.ShareButtonLabel;
 
 //        let activity = activityViewController(activityItems: [image1 as! UIImage], applicationActivities: nil)

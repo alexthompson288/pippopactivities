@@ -14,4 +14,5 @@ class ActivityCell: UICollectionViewCell {
 
     @IBOutlet weak var ActivityImage: UIImageView!
 
+    @IBOutlet weak var ActivityInstructionsLabel: UILabel!
 }

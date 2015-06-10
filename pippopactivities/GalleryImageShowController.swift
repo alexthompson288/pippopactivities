@@ -34,11 +34,13 @@ class GalleryImageShowController: UIViewController {
     var imagePublicViewStatus: Bool!
     var votecount: Int!
     var votestatus: Bool! { didSet { checkVoteStatus() }}
+    var imageLearnerId: Int!
     
     @IBOutlet weak var PublicViewStatusLabel: UILabel!
     @IBOutlet weak var VoteCountLabel: UILabel!
     
     override func viewDidLoad() {
+        
         println("Gallery show VC Loaded")
         println("Image file is \(self.imageFile))")
         println("Data dict is \(dataDict)")
@@ -48,6 +50,13 @@ class GalleryImageShowController: UIViewController {
         self.imageRecordID = self.dataDict["id"] as! Int
         self.imagePublicViewStatus = self.dataDict["publicview"] as! Bool
         self.PublicView.setOn(self.imagePublicViewStatus, animated: true)
+        self.imageLearnerId = self.dataDict["learner_id"] as! Int
+        println("ImageLearnerId= \(self.imageLearnerId) and LearnerId= \(self.learnerID)")
+        if self.imageLearnerId != self.learnerID {
+            self.DeleteLabel.hidden = true
+            self.PublicView.hidden = true
+            self.PublicViewStatusLabel.hidden = true
+        }
         println("Learner id is \(self.learnerID). ID is \(self.imageRecordID). Status is \(self.imagePublicViewStatus)")
         var filePathLocal = Utility.createFilePathInDocsDir(self.imageFile)
         if Utility.checkIfFileExistsAtPath(filePathLocal){
@@ -62,10 +71,13 @@ class GalleryImageShowController: UIViewController {
     
     @IBAction func StarAction(sender: AnyObject) {
         if self.votestatus == true {
-            self.VoteCountLabel.text = "\(self.votecount - 1)"
+            if self.votecount != 0 {
+                self.VoteCountLabel.text = "\(self.votecount - 1)"
+            }
             self.StarButtonLabel.setImage(UIImage(named: "star_a_150"), forState: .Normal)
 
         } else {
+            
             self.VoteCountLabel.text = "\(self.votecount + 1)"
             self.StarButtonLabel.setImage(UIImage(named: "star_a_150"), forState: .Normal)
 

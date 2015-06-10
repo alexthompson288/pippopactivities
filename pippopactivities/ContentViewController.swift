@@ -76,22 +76,36 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
         }
     }
     
-    func toggleCertificateItems(status: Bool){
-        println("Certificate items hidden is \(status)")
-        self.LearnerImage.hidden = status
-        self.AddPhotoLabel.hidden = status
-        self.SaveImageLabel.hidden = status
-        self.ShareImageLabel.hidden = status
-        self.SeeGalleryLabel.hidden = status
+    @IBAction func ClearPhotoAction(sender: AnyObject) {
+        println("Clearing image view...")
+        
+        self.TakePhotoView.hidden = false
+        self.SavePhotoView.hidden = true
     }
+    
+    
+    
+//    func toggleCertificateItems(status: Bool){
+//        println("Certificate items hidden is \(status)")
+//        self.TakePhotoView.hidden = status
+//        self.LearnerImage.hidden = status
+//        self.AddPhotoLabel.hidden = status
+//        self.SaveImageLabel.hidden = status
+//        self.ShareImageLabel.hidden = status
+//        self.SeeGalleryLabel.hidden = status
+//    }
     
     @IBOutlet weak var ToGalleryButton: UIButton!
     
     override func viewDidLoad()
     {
+        self.TotalImage.hidden = true
         super.viewDidLoad()
         self.isPlaying = false
-        toggleCertificateItems(true)
+        self.SharePhotoView.hidden = true
+        self.SavePhotoView.hidden = true
+        self.TakePhotoView.hidden = true
+//        toggleCertificateItems(true)
         learnerID = NSUserDefaults.standardUserDefaults().objectForKey("learnerID") as! Int
         ImageLoader.sharedLoader.imageForUrl(self.imageFile, completionHandler:{(image: UIImage?, url: String) in
             self.ContentImage.image = image
@@ -99,16 +113,18 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
         
         if mediaType == "video"{
             println("VIDEO PAGE")
-            toggleCertificateItems(true)
+//            toggleCertificateItems(true)
         } else if mediaType == "audio" {
             println("AUDIO PAGE")
-            toggleCertificateItems(true)
+//            toggleCertificateItems(true)
         } else if mediaType == "certificate" {
-            toggleCertificateItems(false)
+//            toggleCertificateItems(false)
+            self.TakePhotoView.hidden = false
             self.userstatus = "1"
             println("CERTIFICATE PAGE")
         } else if mediaType == "photograph" {
-            toggleCertificateItems(false)
+            self.TakePhotoView.hidden = false
+//            toggleCertificateItems(false)
             println("PHOTOGRAPH PAGE")
         }
         
@@ -149,6 +165,9 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
         
         dismissViewControllerAnimated(true, completion: nil)
         self.mergeImages()
+        self.TakePhotoView.hidden = true
+        println("About to show the save photo view")
+        self.SavePhotoView.hidden = false
     }
     
     func mergeImages(){
@@ -156,14 +175,14 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
         ContentImage.image?.drawInRect(CGRect(x: 0, y: 0, width: ContentImage.frame.size.width, height: ContentImage.frame.size.height), blendMode: kCGBlendModeNormal, alpha: 1.0)
         LearnerImage.image?.drawInRect(CGRect(x: 0, y: 0, width: LearnerImage.frame.size.width, height: LearnerImage.frame.size.height), blendMode: kCGBlendModeNormal, alpha: 1.0)
         ContentImage.image = UIGraphicsGetImageFromCurrentImageContext()
-        self.TotalImage.image = UIGraphicsGetImageFromCurrentImageContext()
+//        self.TotalImage.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         println("Blended together the images...")
         LearnerImage.image = nil
     }
     
     func share(){
-        let image1 = self.TotalImage.image
+        let image1 = self.ContentImage.image
         
         var avc:UIActivityViewController = Utility.socialShare(sharingText: "Come join us learning with Pip", sharingImage: image1, sharingURL: NSURL(string: "http://www.pippoplearning.com/"))
         avc.popoverPresentationController!.sourceView = self.ShareImageLabel;
@@ -175,7 +194,7 @@ class ContentViewController: UIViewController, UINavigationControllerDelegate, U
     }
     
     func uploadToS3(){
-        var img:UIImage = TotalImage.image!
+        var img:UIImage = ContentImage.image!
         //        var time = NSDate()
         var random = Int(arc4random_uniform(99999))
         var spaces3urlname = "\(self.learnerID)_\(random)_image.jpg"

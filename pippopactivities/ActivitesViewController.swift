@@ -24,25 +24,8 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     var allImages = [String]()
     var allTitles = [String]()
+    var allInstructions = [String]()
     var totalData = NSArray()
-    
-    let pickerData = [
-        ["Digital","Printable","Certificate"],
-        ["Pink: 3 - 4 years","Red: 4 years","Yellow: 4 - 5 years","Blue: 4 - 6 years","Green: 5 - 6 years"]
-    ]
-    
-    enum PickerComponent:Int{
-        case size = 0
-        case topping = 1
-    }
-    
-//    func updateLabel(){
-//        var sizeComponent = PickerComponent.size.rawValue
-//        let toppingComponent = PickerComponent.topping.rawValue
-//        let size = pickerData[sizeComponent][myPicker.selectedRowInComponent(sizeComponent)]
-//        let topping = pickerData[toppingComponent][myPicker.selectedRowInComponent(toppingComponent)]
-//        myLabel.text = "Pizza: " + size + " " + topping
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,10 +37,6 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
         self.MyCollectionView.delegate = self
         self.MyCollectionView.dataSource = self
         self.MyCollectionView.contentOffset = CGPointZero
-//        myPicker.delegate = self
-//        myPicker.dataSource = self
-//        myPicker.selectRow(2, inComponent: PickerComponent.size.rawValue, animated: false)
-//        updateLabel()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -100,6 +79,9 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
                     self.allImages.append(img)
                     var title = exp["title"] as! String
                     self.allTitles.append(title)
+                    var instruction = exp["overview"] as! String
+                    println("instruction is \(instruction)")
+                    self.allInstructions.append(instruction)
                     dispatch_async(dispatch_get_main_queue()){
                         self.MyCollectionView.reloadData()
                     }
@@ -172,6 +154,7 @@ class ActivitiesViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell: ActivityCell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellID", forIndexPath: indexPath) as! ActivityCell
         cell.ActivityTitle.text = allTitles[indexPath.row]
+        cell.ActivityInstructionsLabel.text = allInstructions[indexPath.row]
         var imagename = allImages[indexPath.row] as String
         println("Image name is \(imagename)")
         ImageLoader.sharedLoader.imageForUrl(imagename, completionHandler:{(image: UIImage?, url: String) in

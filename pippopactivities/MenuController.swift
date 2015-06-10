@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import MediaPlayer
+
 
 
 
@@ -19,8 +21,10 @@ class MenuController: UIViewController {
     
     @IBOutlet weak var LoggedInAsLabel: UILabel!
     
+    var moviePlayer = MPMoviePlayerController()
     
     override func viewDidLoad() {
+        playBackgroundVideo()
         println("View loaded")
         var filepath = Utility.createFilePathInDocsDir("userData.plist")
         var dataPresent = Utility.checkIfFileExistsAtPath(filepath)
@@ -47,6 +51,28 @@ class MenuController: UIViewController {
         if let name = learnerName {
             self.LoggedInAsLabel.text = "Logged in as \(name)"
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.moviePlayer.play()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.moviePlayer.stop()
+    }
+    
+    func playBackgroundVideo(){
+        var urlpath = NSBundle.mainBundle().URLForResource("ipad_homevideo", withExtension: "mp4")
+        println("url path is \(urlpath)")
+        self.moviePlayer = MPMoviePlayerController(contentURL: urlpath!)
+        self.moviePlayer.shouldAutoplay = true
+        self.moviePlayer.setFullscreen(false, animated: true)
+        self.moviePlayer.controlStyle = MPMovieControlStyle.None
+        self.moviePlayer.scalingMode = MPMovieScalingMode.AspectFill
+        self.moviePlayer.repeatMode = MPMovieRepeatMode.One
+        self.moviePlayer.view.frame = self.view.bounds
+        self.view.addSubview(self.moviePlayer.view)
+        self.view.sendSubviewToBack(moviePlayer.view)
     }
     
     @IBAction func ChangeLearner(sender: AnyObject) {

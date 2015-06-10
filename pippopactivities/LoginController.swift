@@ -16,6 +16,7 @@ var learnerIDs = [Int]()
 class LoginController:UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var ErrorLabel: UILabel!
+    @IBOutlet weak var ErrorRegisterLabel: UILabel!
     
     @IBOutlet weak var EmailField: UITextField!
 
@@ -88,6 +89,10 @@ class LoginController:UIViewController, UITextFieldDelegate {
         //        AttemptLoginWithLocalDetails()
     }
     
+    @IBAction func RegisterUserButton(sender: AnyObject) {
+        RegisterUser()
+
+    }
 
     override func viewDidAppear(animated: Bool) {
         self.ErrorLabel.hidden = true
@@ -114,25 +119,29 @@ class LoginController:UIViewController, UITextFieldDelegate {
     
     func updateUI(){
         if self.loginScreen == true {
-            self.ErrorLabel.hidden = true
-            self.EmailField.alpha = visible
-            self.PasswordField.alpha = visible
-            self.RegisterChildField.alpha = self.invisible
-            self.RegisterParentField.alpha = self.invisible
-            self.RegisterEmailField.alpha = self.invisible
-            self.RegisterPasswordField.alpha = self.invisible
-            self.LoginRegisterButtonLabel.titleLabel!.text = "Login"
-            self.BottomLoginRegisterToggleLabel.titleLabel!.text = "Register"
+            self.LoginFieldsView.hidden = false
+            self.RegisterFieldsView.hidden = true
+//            self.ErrorLabel.hidden = true
+//            self.EmailField.alpha = visible
+//            self.PasswordField.alpha = visible
+//            self.RegisterChildField.alpha = self.invisible
+//            self.RegisterParentField.alpha = self.invisible
+//            self.RegisterEmailField.alpha = self.invisible
+//            self.RegisterPasswordField.alpha = self.invisible
+//            self.LoginRegisterButtonLabel.titleLabel!.text = "Login"
+//            self.BottomLoginRegisterToggleLabel.titleLabel!.text = "Register"
         } else {
-            self.ErrorLabel.hidden = true
-            self.EmailField.alpha = self.invisible
-            self.PasswordField.alpha = self.invisible
-            self.RegisterChildField.alpha = visible
-            self.RegisterParentField.alpha = visible
-            self.RegisterEmailField.alpha = visible
-            self.RegisterPasswordField.alpha = visible
-            self.LoginRegisterButtonLabel.titleLabel!.text = "Register"
-            self.BottomLoginRegisterToggleLabel.titleLabel!.text = "Login"
+            self.LoginFieldsView.hidden = true
+            self.RegisterFieldsView.hidden = false
+//            self.ErrorLabel.hidden = true
+//            self.EmailField.alpha = self.invisible
+//            self.PasswordField.alpha = self.invisible
+//            self.RegisterChildField.alpha = visible
+//            self.RegisterParentField.alpha = visible
+//            self.RegisterEmailField.alpha = visible
+//            self.RegisterPasswordField.alpha = visible
+//            self.LoginRegisterButtonLabel.titleLabel!.text = "Register"
+//            self.BottomLoginRegisterToggleLabel.titleLabel!.text = "Login"
         }
     }
     
@@ -150,13 +159,7 @@ class LoginController:UIViewController, UITextFieldDelegate {
     
     @IBAction func LoginButton(sender: AnyObject) {
         println("What is in register field \(self.RegisterChildField)")
-    
-        if self.loginScreen == true {
-            println("About do first login function")
-            FirstLoginUserFunction()
-        } else {
-            RegisterUser()
-        }
+        FirstLoginUserFunction()
     }
     
     func RegisterUser(){
@@ -247,6 +250,9 @@ class LoginController:UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         println("Pressed return")
+        if self.LoginFieldsView.hidden == false {
+            FirstLoginUserFunction()
+        }
         textField.resignFirstResponder()
         self.view.endEditing(true)
         if self.loginScreen == true {
